@@ -7,16 +7,21 @@ exports = module.exports = {
   tests: []
 }
 
-exports.tests.push(checkColumnHeaders)
-function checkColumnHeaders(rows) {
+/** 
+ * @param  {Array} The rows of the spreadsheet parsed out
+ * @param  {String} The raw string of the file
+ * @return {Object} The result of the test
+ */
+function checkColumnHeaders(rows, str) {
   console.log("checking column headers", rows.length)
   var result = {};
   return result;
 }
+exports.tests.push(checkColumnHeaders)
 
-exports.tests.push(fooBar)
 function fooBar(rows) {
   console.log("fooing some bars", rows.length)
   var result = {};
   return result;
 }
+exports.tests.push(fooBar)
