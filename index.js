@@ -1,5 +1,5 @@
 // Require modules needed for tests.
-//_ = require('lo-dash');
+_ = require('lodash');
 
 // All test suites will have a name and a list 
 exports = module.exports = {
