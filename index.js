@@ -20,14 +20,14 @@ function fooBar(rows, str, input) {
   console.log("fooing some bars", rows.length)
   var result = {
     // whether or not the 
-    passed: false,
+    passed: false, // REQUIRED FOR RESULT API
     // potential ways of reporting problems
     // we probably just want to use indexes into the dataset
     invalidRows: [1, 55, 200],
     invalidColumns: ['State', 'zipcode'],
     invalidCells: [ [0, 0], [100, 234], [ 55, 60 ]],
-    message: "You foo'd up",
-    template: _.template(`<span class="test-header">foooooo: <%= foo %></span>`)({ foo: 100}) //define template and compile it to html
+    message: "You foo'd up", // REQUIRED FOR RESULT API
+    template: _.template(`<span class="test-header">foooooo: <%= foo %></span>`)({ foo: 100}) // REQUIRED FOR RESULT API define template and compile it to html
   };
   return result;
 }
@@ -148,13 +148,47 @@ exports.tests.push(columnsContainNumbers)
 
 
 /** 
+ * Check for column headers in spreadsheet-like data
+ * Do all columns have a string indicating the nature of the data column?
+ * **Assumptions**: Without column headers, it can be difficult to discern the nature of a dataset.
+ *
  * @param  {Array} The rows of the spreadsheet parsed out
  * @param  {String} The raw string of the file
  * @return {Object} The result of the test
+ * @example
+ * columnHeads({'': 'foo@whitehouse.gov', 'name': 'Jane Smith'});
+ * // {"passed":false, "message": , "template": }
  */
 function checkColumnHeaders(rows, str) {
-  console.log("checking column headers", rows.length)
-  var result = {};
+  console.log("checking column headers", rows.length);
+
+  var firstRow = jsonData[0];
+  var columnHeadersArray = _.keys(firstRow);
+  var totalColumnsCount = columnHeadersArray.length;
+  var missingHeadersCount;
+
+  for (var i = 0; i < columnHeadersArray.length; i++) {
+    var currItem = columnHeadersArray[i];
+    if (currItem.length === 0) {
+      missingHeadersCount += 1;
+    }
+  }
+
+  if (missingHeadersCount > 0) {
+    testResult.passed = false;
+  } else {
+    testResult.passed = true;
+  }
+
+  var message;
+  var template;
+
+  var result = {
+    passed: null,
+    message: message,
+    template: template
+  };
+
   return result;
 }
 exports.tests.push(checkColumnHeaders)
