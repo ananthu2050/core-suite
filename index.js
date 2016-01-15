@@ -57,9 +57,24 @@ function columnsContainNothing(rows) {
     })
   })
 
+  var message = ", ";
+  cols.forEach(function(col, i) {
+    message += col + ": " + nothing[col]
+    if(i < cols.length-1) message += ", "
+  })
+
+  var template = _.template(`
+  <span class="test-header"># of rows for each column with no value:</span><br/>
+  <% _.forEach(cols, function(col) { %>
+    <span class="test-column"><%= col %></span>: <span class="test-value"><%= nothing[col] %></span><br/>
+  <% }) %>
+  `)({ cols: cols, nothing: nothing })
+
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
-    numbers: nothing
+    numbers: nothing,
+    message: message, // for console rendering
+    template: template,
   }
   return result;
 }
@@ -72,9 +87,6 @@ exports.tests.push(columnsContainNothing)
  * @return {Object} the result
  */
 function columnsContainNumbers(rows) {
-  // TODO: should we pass in the columns?
-  // when using d3 it will include one of each detected column for all rows
-  // so we have it implicitly. we may want to be more explicit
   var cols = Object.keys(rows[0]);
   var numbers = {};
   cols.forEach(function(col) {
@@ -91,9 +103,24 @@ function columnsContainNumbers(rows) {
     })
   })
 
+  var message = "# of rows for each column with number values:<br/> ";
+  cols.forEach(function(col, i) {
+    message += col + ": " + numbers[col]
+    if(i < cols.length-1) message += "<br/> "
+  })
+
+  var template = _.template(`
+  <span class="test-header"># of rows for each column with a number value:</span><br/>
+  <% _.forEach(cols, function(col) { %>
+    <span class="test-column"><%= col %></span>: <span class="test-value"><%= numbers[col] %></span><br/>
+  <% }) %>
+  `)({ cols: cols, numbers: numbers })
+
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
-    numbers: numbers
+    numbers: numbers,
+    message: message,
+    template: template
   }
   return result;
 }
