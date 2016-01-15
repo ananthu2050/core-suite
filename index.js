@@ -84,9 +84,9 @@ function columnsContainNothing(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header"># of rows for each column with no value:</span><br/>
+  <span class="test-header">Empty Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
-    <span class="test-column"><%= col %></span>: <span class="test-value"><%= nothing[col] %></span><br/>
+    We found <span class="test-value"><%= nothing[col] %></span> empty cells for column <span class="test-column"><%= col %></span><br/>
   <% }) %>
   `)({ cols: cols, nothing: nothing })
 
@@ -130,10 +130,11 @@ function columnsContainNumbers(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header"># of rows for each column with a number value:</span><br/>
+  <span class="test-header">Numeric Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
-    <span class="test-column"><%= col %></span>: <span class="test-value"><%= numbers[col] %></span><br/>
+    We found <span class="test-value"><%= numbers[col] %></span> cells with a numeric value for column <span class="test-column"><%= col %></span><br/>
   <% }) %>
+
   `)({ cols: cols, numbers: numbers })
 
   var result = {
