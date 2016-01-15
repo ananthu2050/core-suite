@@ -25,13 +25,33 @@ function fooBar(rows, str, input) {
     // we probably just want to use indexes into the dataset
     invalidRows: [1, 55, 200],
     invalidColumns: ['State', 'zipcode'],
-    invalidCells: [ [0, 0], [100, 234], [ 55, 60 ]]
+    invalidCells: [ [0, 0], [100, 234], [ 55, 60 ]],
+    message: "You foo'd up",
+    template: _.template(`<span class="test-header">foooooo: <%= foo %></span>`)({ foo: 100}) //define template and compile it to html
   };
   return result;
 }
 // We don't actually want to run this test, but if we did we would push it to the tests
 //exports.tests.push(fooBar)
 
+/**
+ * Simple test to count and display the number of rows
+ * @param  {Array}
+ * @return {Object}
+ */
+function numberOfRows(rows) {
+  var message = "This spreadsheet has " + rows.length + " rows"
+  var template = _.template(`
+    <span class="test-header">This spreadsheet has <%= rows %> rows</span>
+  `)({ rows: rows.length })
+  var result = {
+    passed: true, // this doesn't really fail, as it is mostly an insight
+    message: message,
+    template: template
+  }
+  return result;
+}
+exports.tests.push(numberOfRows)
 
 /**
  * Determine the percentage of rows that are empty for each column
