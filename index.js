@@ -51,12 +51,42 @@ function numberOfRows(rows) {
   `)({ rows: rows.length })
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
+    title: "Number of rows",
     message: message,
     template: template
   }
   return result;
 }
 exports.tests.push(numberOfRows)
+
+
+/**
+ * Test to see if # of rows is exactly 65,536 rows (cutoff by Excel)
+ * @param  {Array}
+ * @return {Object}
+ */
+function numberOfRowsIs65k(rows) {
+  var message, template, passed;
+  if(rows.length === 65536) {
+    message = "Warning: This spreadsheet has " + rows.length + " rows, a common cutoff point for Excel indicating your dataset may be missing rows."
+    template = _.template(`
+      <span class="test-header warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
+    `)({ rows: rows.length })
+    passed = false;
+  } else {
+    passed = true;
+    message = "No anomolies detected"
+  }
+  
+  var result = {
+    passed: passed, // this doesn't really fail, as it is mostly an insight
+    title: "Potentially missing rows",
+    message: message,
+    template: template
+  }
+  return result;
+}
+exports.tests.push(numberOfRowsIs65k)
 
 /**
  * Determine the percentage of rows that are empty for each column
@@ -96,7 +126,6 @@ function columnsContainNothing(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header">Empty Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
     <% if(nothing[col]) { %>
     We found <span class="test-value"><%= nothing[col] %></span> empty cells (<%= percent(nothing[col]/rows.length) %>) for column <span class="test-column"><%= col %></span><br/>
@@ -107,6 +136,7 @@ function columnsContainNothing(rows) {
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: nothing,
+    title: "Empty Cells",
     highlightCells: cells,
     message: message, // for console rendering
     template: template,
@@ -151,7 +181,6 @@ function columnsContainNumbers(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header">Numeric Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
     <% if(numbers[col]) { %>
     We found <span class="test-value"><%= numbers[col] %></span> cells (<%= percent(numbers[col]/rows.length) %>) with a numeric value for column <span class="test-column"><%= col %></span><br/>
@@ -163,6 +192,7 @@ function columnsContainNumbers(rows) {
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: numbers,
+    title: "Numeric Cells",
     highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     message: message,
     template: template
@@ -179,7 +209,9 @@ exports.tests.push(columnsContainNumbers)
  */
 function checkColumnHeaders(rows, str) {
   console.log("checking column headers", rows.length)
-  var result = {};
+  var result = {
+    title: "Column Headers"
+  };
   return result;
 }
 exports.tests.push(checkColumnHeaders)
