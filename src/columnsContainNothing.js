@@ -10,49 +10,49 @@ function columnsContainNothing(rows) {
   // TODO: should we pass in the columns?
   // when using d3 it will include one of each detected column for all rows
   // so we have it implicitly. we may want to be more explicit
-  var cols = Object.keys(rows[0]);
+  var columnHead = Object.keys(rows[0]);
   var nothing = {};
-  cols.forEach(function(col) {
-    nothing[col] = 0;
+  columnHead.forEach(function(columnHead) {
+    nothing[columnHead] = 0;
   })
 
   var cells = [] // we will want to mark cells to be highlighted here
   // look through the rows
   rows.forEach(function(row) {
     var crow = {} // we make a row to keep track of cells we want to highlight
-    cols.forEach(function(col) {
-      var cell = row[col];
+    columnHead.forEach(function(columnHead) {
+      var cell = row[columnHead];
       if(cell === "") { 
-        nothing[col] += 1;
-        crow[col] = 1;
+        nothing[columnHead] += 1;
+        crow[columnHead] = 1;
       } else {
-        crow[col] = 0;
+        crow[columnHead] = 0;
       }
     })
     cells.push(crow) // push our marking row onto our cells array
   })
 
-  var message = ", ";
-  cols.forEach(function(col, i) {
-    message += col + ": " + nothing[col]
-    if(i < cols.length-1) message += ", "
+  var consoleMessage = ", ";
+  columnHead.forEach(function(columnHead, i) {
+    consoleMessage += columnHead + ": " + nothing[columnHead]
+    if(i < columnHead.length-1) consoleMessage += ", "
   })
 
-  var template = _.template(`
-  <% _.forEach(cols, function(col) { %>
-    <% if(nothing[col]) { %>
-    We found <span class="test-value"><%= nothing[col] %></span> empty cells (<%= percent(nothing[col]/rows.length) %>) for column <span class="test-column"><%= col %></span><br/>
+  var htmlTemplate = _.template(`
+  <% _.forEach(columnHead, function(columnHead) { %>
+    <% if(nothing[columnHead]) { %>
+    We found <span class="test-value"><%= nothing[columnHead] %></span> empty cells (<%= percent(nothing[columnHead]/rows.length) %>) for column <span class="test-column"><%= columnHead %></span><br/>
     <% } %>
   <% }) %>
-  `)({ cols: cols, nothing: nothing, rows: rows, percent: percent })
+  `)({ columnHead: columnHead, nothing: nothing, rows: rows, percent: percent })
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: nothing,
     title: "Empty Cells",
     highlightCells: cells,
-    message: message, // for console rendering
-    template: template,
+    consoleMessage: consoleMessage, // for console rendering
+    htmlTemplate: htmlTemplate,
   }
   return result;
 }

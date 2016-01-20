@@ -10,7 +10,7 @@ var _ = require('lodash');
  * @return {Object} The result of the test
  * @example
  * columnHeads({'': 'foo@whitehouse.gov', 'name': 'Jane Smith'});
- * // {"passed":false, "message": , "template": }
+ * // {"passed":false, "consoleMessage": , "htmlTemplate": _.comple('<%= missingHeadersCount %>');}
  */
 function checkColumnHeaders(rows, str) {
   console.log("checking column headers", rows.length);
@@ -36,17 +36,17 @@ function checkColumnHeaders(rows, str) {
     isPassed = true;
   }
 
-  var message = "Columns without headers:<br/> ";
+  var consoleMessage = "Columns without headers:<br/> ";
   columnHeads.forEach(function(columnHead, index) {
-    message += "column " + index
-    if(i < columnHeads.length-1) message += "<br/> "
+    consoleMessage += "column " + index
+    if(i < columnHeads.length-1) consoleMessage += "<br/> "
   })
-  var template;
+  var htmlTemplate;
 
   var result = {
     passed: isPassed,
-    message: message,
-    template: template
+    consoleMessage: consoleMessage,
+    htmlTemplate: htmlTemplate
   };
 
   return result;

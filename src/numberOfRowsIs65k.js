@@ -6,23 +6,25 @@ var _ = require('lodash');
  * @return {Object}
  */
 function numberOfRowsIs65k(rows) {
-  var message, template, passed;
+  var consoleMessage;
+  var htmlTemplate;
+  var passed;
   if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included
-    message = "Warning: This spreadsheet has " + rows.length + " rows, a common cutoff point for Excel indicating your dataset may be missing rows."
-    template = _.template(`
+    consoleMessage = "Warning: This spreadsheet has " + rows.length + " rows, a common cutoff point for Excel indicating your dataset may be missing rows."
+    htmlTemplate = _.htmltemplate(`
       <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
     `)({ rows: rows.length })
     passed = false;
   } else {
     passed = true;
-    message = "No anomolies detected"
+    consoleMessage = "No anomolies detected"
   }
   
   var result = {
     passed: passed, // this doesn't really fail, as it is mostly an insight
     title: "Potentially missing rows",
-    message: message,
-    template: template
+    consoleMessage: consoleMessage,
+    htmlTemplate: htmlTemplate
   }
   return result;
 }
