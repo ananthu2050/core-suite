@@ -9,6 +9,8 @@ Core suite of tests for DataProofer
 dataproofer/
 ├── core-suite/
 │   ├── index.js
+│   ├── src/
+│   │   ├── tests...
 ```
 
 ### Result API
