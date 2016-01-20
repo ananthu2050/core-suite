@@ -37,12 +37,12 @@ var columnsContainNumbers = require('./src/columnsContainNumbers');
 var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Characters');
 var checkColumnHeaders = require('./src/checkColumnHeaders');
 
-exports.tests.push([
+exports.tests.push(
   numberOfRows,
   numberOfRowsIs65k,
   columnsContainNothing,
   columnsContainNumbers,
   stringsHaveExactly255Characters,
-  checkColumnHeaders,
-]);
+  checkColumnHeaders
+);
 
