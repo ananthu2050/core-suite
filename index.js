@@ -8,6 +8,11 @@ exports = module.exports = {
   subtests: [],   // a list of tests that can be triggered by the main tests but wont be run automatically
 }
 
+function percent(fraction) {
+  var formatPercent = d3.format('.2f')
+  return formatPercent(100*fraction) + "%";
+}
+
 
 /** 
  * This fooBar function is a placeholder to demonstrate what a test can expect
@@ -66,15 +71,22 @@ function columnsContainNothing(rows) {
   var nothing = {};
   cols.forEach(function(col) {
     nothing[col] = 0;
-  });
+  })
+
+  var cells = [] // we will want to mark cells to be highlighted here
   // look through the rows
   rows.forEach(function(row) {
+    var crow = {} // we make a row to keep track of cells we want to highlight
     cols.forEach(function(col) {
       var cell = row[col];
       if(cell === "") { 
         nothing[col] += 1;
+        crow[col] = 1;
+      } else {
+        crow[col] = 0;
       }
     })
+    cells.push(crow) // push our marking row onto our cells array
   })
 
   var message = ", ";
@@ -86,13 +98,16 @@ function columnsContainNothing(rows) {
   var template = _.template(`
   <span class="test-header">Empty Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
-    We found <span class="test-value"><%= nothing[col] %></span> empty cells for column <span class="test-column"><%= col %></span><br/>
+    <% if(nothing[col]) { %>
+    We found <span class="test-value"><%= nothing[col] %></span> empty cells (<%= percent(nothing[col]/rows.length) %>) for column <span class="test-column"><%= col %></span><br/>
+    <% } %>
   <% }) %>
-  `)({ cols: cols, nothing: nothing })
+  `)({ cols: cols, nothing: nothing, rows: rows, percent: percent })
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: nothing,
+    highlightCells: cells,
     message: message, // for console rendering
     template: template,
   }
@@ -112,15 +127,21 @@ function columnsContainNumbers(rows) {
   cols.forEach(function(col) {
     numbers[col] = 0;
   })
+  var cells = [] // we will want to mark cells to be highlighted here
   // look through the rows
   rows.forEach(function(row) {
+    var crow = {} // we make a row to keep track of cells we want to highlight
     cols.forEach(function(col) {
       var cell = row[col];
       var f = parseFloat(cell);
       if(f.toString() === cell) { // this will only be true if the cell is a number
         numbers[col] += 1;
+        crow[col] = 1
+      } else {
+        crow[col] = 0
       }
     })
+    cells.push(crow) // push our marking row onto our cells array
   })
 
   var message = "# of rows for each column with number values:<br/> ";
@@ -132,14 +153,17 @@ function columnsContainNumbers(rows) {
   var template = _.template(`
   <span class="test-header">Numeric Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
-    We found <span class="test-value"><%= numbers[col] %></span> cells with a numeric value for column <span class="test-column"><%= col %></span><br/>
+    <% if(numbers[col]) { %>
+    We found <span class="test-value"><%= numbers[col] %></span> cells (<%= percent(numbers[col]/rows.length) %>) with a numeric value for column <span class="test-column"><%= col %></span><br/>
+    <% } %>
   <% }) %>
 
-  `)({ cols: cols, numbers: numbers })
+  `)({ cols: cols, numbers: numbers, rows: rows, percent: percent })
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: numbers,
+    highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     message: message,
     template: template
   }
