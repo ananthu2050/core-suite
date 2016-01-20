@@ -1,3 +1,6 @@
+var _ = require('lodash');
+var percent = require('../utils/percent');
+
 /**
  * Determine the cells that have exactly 255 characters (SQL upper limit error)
  * @param  {Array} the rows of the spreadsheet
@@ -58,3 +61,5 @@ function stringsHaveExactly255Characters(rows) {
   }
   return result;
 }
+
+module.exports = stringsHaveExactly255Characters;

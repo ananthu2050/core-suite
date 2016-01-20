@@ -1,3 +1,6 @@
+var _ = require('lodash');
+var percent = require('../utils/percent');
+
 /**
  * Determine the percentage of rows that are numbers for each column
  * @param  {Array} the rows of the spreadsheet

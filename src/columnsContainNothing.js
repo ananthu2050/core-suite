@@ -1,3 +1,6 @@
+var _ = require('lodash');
+var percent = require('../utils/percent');
+
 /**
  * Determine the percentage of rows that are empty for each column
  * @param  {Array} the rows of the spreadsheet

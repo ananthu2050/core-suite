@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 /** 
  * Check for column headers in spreadsheet-like data
  * Do all columns have a string indicating the nature of the data column?

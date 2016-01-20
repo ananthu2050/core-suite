@@ -1,9 +1,10 @@
+var _ = require('lodash');
+
 /**
  * Test to see if # of rows is exactly 65,536 rows (cutoff by Excel)
  * @param  {Array}
  * @return {Object}
  */
-
 function numberOfRowsIs65k(rows) {
   var message, template, passed;
   if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included

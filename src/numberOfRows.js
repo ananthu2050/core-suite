@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 /**
  * Simple test to count and display the number of rows
  * @param  {Array}
