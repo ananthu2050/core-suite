@@ -47,16 +47,46 @@ function fooBar(rows, str, input) {
 function numberOfRows(rows) {
   var message = "This spreadsheet has " + rows.length + " rows"
   var template = _.template(`
-    <span class="test-header">This spreadsheet has <%= rows %> rows</span>
+    <span>This spreadsheet has <%= rows %> rows</span>
   `)({ rows: rows.length })
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
+    title: "Number of rows",
     message: message,
     template: template
   }
   return result;
 }
 exports.tests.push(numberOfRows)
+
+
+/**
+ * Test to see if # of rows is exactly 65,536 rows (cutoff by Excel)
+ * @param  {Array}
+ * @return {Object}
+ */
+function numberOfRowsIs65k(rows) {
+  var message, template, passed;
+  if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included
+    message = "Warning: This spreadsheet has " + rows.length + " rows, a common cutoff point for Excel indicating your dataset may be missing rows."
+    template = _.template(`
+      <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
+    `)({ rows: rows.length })
+    passed = false;
+  } else {
+    passed = true;
+    message = "No anomolies detected"
+  }
+  
+  var result = {
+    passed: passed, // this doesn't really fail, as it is mostly an insight
+    title: "Potentially missing rows",
+    message: message,
+    template: template
+  }
+  return result;
+}
+exports.tests.push(numberOfRowsIs65k)
 
 /**
  * Determine the percentage of rows that are empty for each column
@@ -96,7 +126,6 @@ function columnsContainNothing(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header">Empty Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
     <% if(nothing[col]) { %>
     We found <span class="test-value"><%= nothing[col] %></span> empty cells (<%= percent(nothing[col]/rows.length) %>) for column <span class="test-column"><%= col %></span><br/>
@@ -107,6 +136,7 @@ function columnsContainNothing(rows) {
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: nothing,
+    title: "Empty Cells",
     highlightCells: cells,
     message: message, // for console rendering
     template: template,
@@ -151,7 +181,6 @@ function columnsContainNumbers(rows) {
   })
 
   var template = _.template(`
-  <span class="test-header">Numeric Cells</span><br/>
   <% _.forEach(cols, function(col) { %>
     <% if(numbers[col]) { %>
     We found <span class="test-value"><%= numbers[col] %></span> cells (<%= percent(numbers[col]/rows.length) %>) with a numeric value for column <span class="test-column"><%= col %></span><br/>
@@ -163,6 +192,7 @@ function columnsContainNumbers(rows) {
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
     numbers: numbers,
+    title: "Numeric Cells",
     highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     message: message,
     template: template
@@ -170,6 +200,69 @@ function columnsContainNumbers(rows) {
   return result;
 }
 exports.tests.push(columnsContainNumbers)
+
+
+/**
+ * Determine the cells that have exactly 255 characters (SQL upper limit error)
+ * @param  {Array} the rows of the spreadsheet
+ * @return {Object} the result
+ */
+function stringsHaveExactly255Characters(rows) {
+  var cols = Object.keys(rows[0]);
+  var strings = {};
+  cols.forEach(function(col) {
+    strings[col] = 0;
+  })
+  var cells = [] // we will want to mark cells to be highlighted here
+  var has255 = false
+  // look through the rows
+  rows.forEach(function(row) {
+    var crow = {} // we make a row to keep track of cells we want to highlight
+    cols.forEach(function(col) {
+      var cell = row[col];
+      if(cell.length === 255) {
+        crow[col] = 1
+        strings[col] += 1
+        has255 = true; // we want to know if it occurrs at least once
+      } else {
+        crow[col] = 0
+      }
+    })
+    cells.push(crow) // push our marking row onto our cells array
+  })
+
+  var message, template, passed;
+  if(has255) {
+    passed = false
+    message = "Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export: ";
+    cols.forEach(function(col, i) {
+      message += col + ": " + strings[col]
+      if(i < cols.length-1) message += "<br/> "
+    })
+
+    template = _.template(`Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export:<br/>
+    <% _.forEach(cols, function(col) { %>
+      <% if(strings[col]) { %>
+      We found <span class="test-value"><%= strings[col] %></span> cells (<%= percent(strings[col]/rows.length) %>) with 255 character-length strings for column <span class="test-column"><%= col %></span><br/>
+      <% } %>
+    <% }) %>
+    `)({ cols: cols, strings: strings, rows: rows, percent: percent })
+
+  } else {
+    passed = true;
+    message = "No anomolies found with character lengths of cells";
+  }
+
+  var result = {
+    passed: true, // this doesn't really fail, as it is mostly an insight
+    title: "Strings with 255 Characters (SQL upper limit error)",
+    highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
+    message: message,
+    template: template
+  }
+  return result;
+}
+exports.tests.push(stringsHaveExactly255Characters)
 
 
 /** 
