@@ -3,6 +3,18 @@ Core suite of tests for DataProofer
 
 ## Writing tests
 
+### Writing documentation
+
+We use [documentation.js](https://github.com/documentationjs/documentation) to generate documentation for every test. Please read this guide for more information on [documentation conventions](https://github.com/documentationjs/documentation/blob/master/docs/GETTING_STARTED.md).
+
+### Generating documentation
+
+```
+npm install -g documentation
+cd src/
+documentation -o ../docs -f "html" *.js
+```
+
 ### Where to write tests
 
 ```
