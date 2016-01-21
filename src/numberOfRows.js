@@ -1,9 +1,10 @@
 var _ = require('lodash');
 
 /**
- * Simple test to count and display the number of rows
- * @param  {Array}
- * @return {Object}
+ * Count and display the number of rows
+ * 
+ * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @return {Object} result an object describing the result
  */
 function numberOfRows(rows) {
   var consoleMessage = "This spreadsheet has " + rows.length + " rows"

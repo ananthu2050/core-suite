@@ -3,8 +3,9 @@ var percent = require('../utils/percent');
 
 /**
  * Determine the cells that have exactly 255 characters (SQL upper limit error)
- * @param  {Array} the rows of the spreadsheet
- * @return {Object} the result
+ *
+ * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @return {Object} result an object describing the result
  */
 function stringsHaveExactly255Characters(rows) {
   var columnHeads = Object.keys(rows[0]);

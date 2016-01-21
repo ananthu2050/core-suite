@@ -1,18 +1,15 @@
 var _ = require('lodash');
 
 /** 
- * Check for column headers in spreadsheet-like data
- * Do all columns have a string indicating the nature of the data column?
- * **Assumptions**: Without column headers, it can be difficult to discern the nature of a dataset.
+ * Check for column headers in spreadsheet-like data 
  *
- * @param  {Array} The rows of the spreadsheet parsed out
- * @param  {String} The raw string of the file
- * @return {Object} The result of the test
+ * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @return {Object} result an object describing the result
  * @example
  * columnHeads({'': 'foo@whitehouse.gov', 'name': 'Jane Smith'});
  * // {"passed":false, "consoleMessage": , "htmlTemplate": _.comple('<%= missingHeadersCount %>');}
  */
-function checkColumnHeaders(rows, str) {
+function checkColumnHeaders(rows) {
   console.log("checking column headers", rows.length);
   var columnHeads = Object.keys(rows[0]);
   var noHeader = {};

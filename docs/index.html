@@ -59,38 +59,17 @@
         <div class='px2'>
 <div class='py1'><section class='py2 clearfix'>
   <h2 id='checkColumnHeaders' class='mt0'>
-    checkColumnHeaders<span class='gray'>(The, The, rows, str)</span>
+    checkColumnHeaders<span class='gray'>(rows)</span>
   </h2>
-  <p>Check for column headers in spreadsheet-like data
-Do all columns have a string indicating the nature of the data column?
-<strong>Assumptions</strong>: Without column headers, it can be difficult to discern the nature of a dataset.</p>
+  <p>Check for column headers in spreadsheet-like data</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>The</strong>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
           :
           <div class='force-inline'>
-            <p>rows of the spreadsheet parsed out</p>
+            <p>an array of objects representing rows in a spreadsheet</p>
 
-          </div>
-        </li>
-        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code> <strong>The</strong>
-          :
-          <div class='force-inline'>
-            <p>raw string of the file</p>
-
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
-          </div>
-        </li>
-        <li> <strong>str</strong>
-          :
-          <div class='force-inline'>
-            
           </div>
         </li>
     </ul>
@@ -98,7 +77,7 @@ Do all columns have a string indicating the nature of the data column?
       <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
       :
       <div class='force-inline'>
-        <p>The result of the test</p>
+        <p>result an object describing the result</p>
 
       </div>
     <h4>Examples</h4>
@@ -107,23 +86,17 @@ Do all columns have a string indicating the nature of the data column?
 </section>
 </div><div class='py1'><section class='py2 clearfix'>
   <h2 id='columnsContainNothing' class='mt0'>
-    columnsContainNothing<span class='gray'>(the, rows)</span>
+    columnsContainNothing<span class='gray'>(rows)</span>
   </h2>
   <p>Determine the percentage of rows that are empty for each column</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>the</strong>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
           :
           <div class='force-inline'>
-            <p>rows of the spreadsheet</p>
+            <p>an array of objects representing rows in a spreadsheet</p>
 
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
           </div>
         </li>
     </ul>
@@ -131,29 +104,23 @@ Do all columns have a string indicating the nature of the data column?
       <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
       :
       <div class='force-inline'>
-        <p>the result</p>
+        <p>result an object describing the result</p>
 
       </div>
 </section>
 </div><div class='py1'><section class='py2 clearfix'>
   <h2 id='columnsContainNumbers' class='mt0'>
-    columnsContainNumbers<span class='gray'>(the, rows)</span>
+    columnsContainNumbers<span class='gray'>(rows)</span>
   </h2>
   <p>Determine the percentage of rows that are numbers for each column</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>the</strong>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
           :
           <div class='force-inline'>
-            <p>rows of the spreadsheet</p>
+            <p>an array of objects representing rows in a spreadsheet</p>
 
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
           </div>
         </li>
     </ul>
@@ -161,85 +128,23 @@ Do all columns have a string indicating the nature of the data column?
       <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
       :
       <div class='force-inline'>
-        <p>the result</p>
+        <p>result an object describing the result</p>
 
       </div>
 </section>
 </div><div class='py1'><section class='py2 clearfix'>
   <h2 id='numberOfRows' class='mt0'>
-    numberOfRows<span class='gray'>(Array, rows)</span>
+    numberOfRows<span class='gray'>(rows)</span>
   </h2>
-  <p>Simple test to count and display the number of rows</p>
+  <p>Count and display the number of rows</p>
 
     <h4>Parameters</h4>
     <ul class='suppress-p-margin'>
-        <li> <strong>Array</strong>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
           :
           <div class='force-inline'>
-            
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
-      
-      <div class='force-inline'>
-        
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='numberOfRowsIs65k' class='mt0'>
-    numberOfRowsIs65k<span class='gray'>(Array, rows)</span>
-  </h2>
-  <p>Test to see if # of rows is exactly 65,536 rows (cutoff by Excel)</p>
+            <p>an array of objects representing rows in a spreadsheet</p>
 
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li> <strong>Array</strong>
-          :
-          <div class='force-inline'>
-            
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
-          </div>
-        </li>
-    </ul>
-      <h4>Returns</h4>
-      <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
-      
-      <div class='force-inline'>
-        
-      </div>
-</section>
-</div><div class='py1'><section class='py2 clearfix'>
-  <h2 id='stringsHaveExactly255Characters' class='mt0'>
-    stringsHaveExactly255Characters<span class='gray'>(the, rows)</span>
-  </h2>
-  <p>Determine the cells that have exactly 255 characters (SQL upper limit error)</p>
-
-    <h4>Parameters</h4>
-    <ul class='suppress-p-margin'>
-        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>the</strong>
-          :
-          <div class='force-inline'>
-            <p>rows of the spreadsheet</p>
-
-          </div>
-        </li>
-        <li> <strong>rows</strong>
-          :
-          <div class='force-inline'>
-            
           </div>
         </li>
     </ul>
@@ -247,7 +152,55 @@ Do all columns have a string indicating the nature of the data column?
       <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
       :
       <div class='force-inline'>
-        <p>the result</p>
+        <p>result an object describing the result</p>
+
+      </div>
+</section>
+</div><div class='py1'><section class='py2 clearfix'>
+  <h2 id='numberOfRowsIs65k' class='mt0'>
+    numberOfRowsIs65k<span class='gray'>(rows)</span>
+  </h2>
+  <p>Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
+          :
+          <div class='force-inline'>
+            <p>an array of objects representing rows in a spreadsheet</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
+      :
+      <div class='force-inline'>
+        <p>result an object describing the result</p>
+
+      </div>
+</section>
+</div><div class='py1'><section class='py2 clearfix'>
+  <h2 id='stringsHaveExactly255Characters' class='mt0'>
+    stringsHaveExactly255Characters<span class='gray'>(rows)</span>
+  </h2>
+  <p>Determine the cells that have exactly 255 characters (SQL upper limit error)</p>
+
+    <h4>Parameters</h4>
+    <ul class='suppress-p-margin'>
+        <li><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code> <strong>rows</strong>
+          :
+          <div class='force-inline'>
+            <p>an array of objects representing rows in a spreadsheet</p>
+
+          </div>
+        </li>
+    </ul>
+      <h4>Returns</h4>
+      <code><code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code></code>
+      :
+      <div class='force-inline'>
+        <p>result an object describing the result</p>
 
       </div>
 </section>

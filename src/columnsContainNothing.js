@@ -3,8 +3,9 @@ var percent = require('../utils/percent');
 
 /**
  * Determine the percentage of rows that are empty for each column
- * @param  {Array} the rows of the spreadsheet
- * @return {Object} the result
+*
+ * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @return {Object} result an object describing the result
  */
 function columnsContainNothing(rows) {
   // TODO: should we pass in the columns?

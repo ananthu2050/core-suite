@@ -1,9 +1,10 @@
 var _ = require('lodash');
 
 /**
- * Test to see if # of rows is exactly 65,536 rows (cutoff by Excel)
- * @param  {Array}
- * @return {Object}
+ * Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)
+ * 
+ * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @return {Object} result an object describing the result
  */
 function numberOfRowsIs65k(rows) {
   var consoleMessage;
