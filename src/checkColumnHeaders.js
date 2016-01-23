@@ -22,7 +22,7 @@ function checkColumnHeaders(rows) {
 
   for (var i = 0; i < columnHeads.length; i++) {
     var currentItem = columnHeads[i];
-    if (currItem.length === 0) {
+    if (currentItem.length === 0) {
       missingHeadersCount += 1;
     }
   }

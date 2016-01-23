@@ -12,7 +12,7 @@ function numberOfRowsIs65k(rows) {
   var passed;
   if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included
     consoleMessage = "Warning: This spreadsheet has " + rows.length + " rows, a common cutoff point for Excel indicating your dataset may be missing rows."
-    htmlTemplate = _.htmltemplate(`
+    htmlTemplate = _.template(`
       <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
     `)({ rows: rows.length })
     passed = false;

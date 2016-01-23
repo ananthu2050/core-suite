@@ -38,11 +38,11 @@ var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Charac
 var checkColumnHeaders = require('./src/checkColumnHeaders');
 
 exports.tests.push(
+  checkColumnHeaders,
   numberOfRows,
   numberOfRowsIs65k,
   columnsContainNothing,
   columnsContainNumbers,
-  stringsHaveExactly255Characters,
-  checkColumnHeaders
+  stringsHaveExactly255Characters
 );
 
