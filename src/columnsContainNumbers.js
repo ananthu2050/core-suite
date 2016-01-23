@@ -4,11 +4,11 @@ var percent = require('../utils/percent');
 /**
  * Determine the percentage of rows that are numbers for each column
  * 
- * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @param  {Array} rows - an array of objects representing rows in the spreadsheet
+ * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  */
-function columnsContainNumbers(rows) {
-  var columnHeads = Object.keys(rows[0]);
+function columnsContainNumbers(rows, columnHeads) {
   var numbers = {};
   columnHeads.forEach(function(columnHead) {
     numbers[columnHead] = 0;

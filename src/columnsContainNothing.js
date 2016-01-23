@@ -4,16 +4,13 @@ var percent = require('../utils/percent');
 /**
  * Determine the percentage of rows that are empty for each column
 *
- * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @param  {Array} rows - an array of objects representing rows in the spreadsheet
+ * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  */
-function columnsContainNothing(rows) {
-  // TODO: should we pass in the columns?
-  // when using d3 it will include one of each detected column for all rows
-  // so we have it implicitly. we may want to be more explicit
-  var columnHead = Object.keys(rows[0]);
+function columnsContainNothing(rows, columnHeads) {
   var nothing = {};
-  columnHead.forEach(function(columnHead) {
+  columnHeads.forEach(function(columnHead) {
     nothing[columnHead] = 0;
   })
 
@@ -21,7 +18,7 @@ function columnsContainNothing(rows) {
   // look through the rows
   rows.forEach(function(row) {
     var crow = {} // we make a row to keep track of cells we want to highlight
-    columnHead.forEach(function(columnHead) {
+    columnHeads.forEach(function(columnHead) {
       var cell = row[columnHead];
       if(cell === "") { 
         nothing[columnHead] += 1;

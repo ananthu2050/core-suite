@@ -3,15 +3,15 @@ var _ = require('lodash');
 /** 
  * Check for column headers in spreadsheet-like data 
  *
- * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @param  {Array} rows - an array of objects representing rows in the spreadsheet
+ * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  * @example
  * columnHeads({'': 'foo@whitehouse.gov', 'name': 'Jane Smith'});
  * // {"passed":false, "consoleMessage": , "htmlTemplate": _.comple('<%= missingHeadersCount %>');}
  */
-function checkColumnHeaders(rows) {
+function checkColumnHeaders(rows, columnHeads) {
   console.log("checking column headers", rows.length);
-  var columnHeads = Object.keys(rows[0]);
   var noHeader = {};
   columnHeads.forEach(function(columnHead, index) {
     noHeader[index] = columnHead;

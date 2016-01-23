@@ -3,10 +3,11 @@ var _ = require('lodash');
 /**
  * Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)
  * 
- * @param  {Array} rows an array of objects representing rows in a spreadsheet
+ * @param  {Array} rows - an array of objects representing rows in the spreadsheet
+ * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  */
-function numberOfRowsIs65k(rows) {
+function numberOfRowsIs65k(rows, columnHeads) {
   var consoleMessage;
   var htmlTemplate;
   var passed;
