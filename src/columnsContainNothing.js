@@ -31,18 +31,18 @@ function columnsContainNothing(rows, columnHeads) {
   })
 
   var consoleMessage = ", ";
-  columnHead.forEach(function(columnHead, i) {
+  columnHeads.forEach(function(columnHead, i) {
     consoleMessage += columnHead + ": " + nothing[columnHead]
     if(i < columnHead.length-1) consoleMessage += ", "
   })
 
   var htmlTemplate = _.template(`
-  <% _.forEach(columnHead, function(columnHead) { %>
+  <% _.forEach(columnHeads, function(columnHead) { %>
     <% if(nothing[columnHead]) { %>
     We found <span class="test-value"><%= nothing[columnHead] %></span> empty cells (<%= percent(nothing[columnHead]/rows.length) %>) for column <span class="test-column"><%= columnHead %></span><br/>
     <% } %>
   <% }) %>
-  `)({ columnHead: columnHead, nothing: nothing, rows: rows, percent: percent })
+  `)({ columnHeads: columnHeads, nothing: nothing, rows: rows, percent: percent })
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight

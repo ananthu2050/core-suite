@@ -36,11 +36,13 @@ var columnsContainNothing = require('./src/columnsContainNothing');
 var columnsContainNumbers = require('./src/columnsContainNumbers');
 var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Characters');
 var checkColumnHeaders = require('./src/checkColumnHeaders');
+var checkDuplicateRows = require('./src/checkDuplicateRows');
 
 exports.tests.push(
   checkColumnHeaders,
   numberOfRows,
   numberOfRowsIs65k,
+  checkDuplicateRows,
   columnsContainNothing,
   columnsContainNumbers,
   stringsHaveExactly255Characters
