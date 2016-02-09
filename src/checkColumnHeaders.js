@@ -11,37 +11,40 @@ var _ = require('lodash');
  * // {"passed":false, "consoleMessage": , "htmlTemplate": _.comple('<%= missingHeadersCount %>');}
  */
 function checkColumnHeaders(rows, columnHeads) {
-  console.log("checking column headers", rows.length);
-  var noHeader = {};
-  columnHeads.forEach(function(columnHead, index) {
-    noHeader[index] = columnHead;
-  });
+  console.log("checking column headers", columnHeads.length);
   var totalColumnsCount = columnHeads.length;
-  var missingHeadersCount;
-  var isPassed;
+  var missingHeadersCount = 0;
+  var htmlTemplate;
+  var consoleMessage;
+  var passed;
 
-  for (var i = 0; i < columnHeads.length; i++) {
-    var currentItem = columnHeads[i];
-    if (currentItem.length === 0) {
+  _.each(columnHeads, function(columnHead) {
+    if (columnHead.length === 0 || columnHead === undefined || columnHead === null) {
       missingHeadersCount += 1;
     }
-  }
+  });
 
   if (missingHeadersCount > 0) {
-    isPassed = false;
+    passed = false
+    columnOrColumns = missingHeadersCount > 1 ? "columns" : "column";
+    consoleMessage = "We found " + missingHeadersCount + " " + columnOrColumns + " without a header"
+    htmlTemplate = _.template(`
+      We found <span class="test-value"><%= missingHeadersCount  %></span> <%= columnOrColumns %> a missing header, which means you'd need to take guesses about the present data or you should provide it with a unique, descriptive name.
+    `)({
+      'missingHeadersCount': missingHeadersCount,
+      'columnOrColumns': columnOrColumns
+    });
+  } else if (missingHeadersCount === 0) {
+    passed = true
+    consoleMessage = "No anomolies detected";
   } else {
-    isPassed = true;
+    passed = false
+    consoleMessage = "We had problems reading your column headers"
   }
 
-  var consoleMessage = "Columns without headers:<br/> ";
-  columnHeads.forEach(function(columnHead, index) {
-    consoleMessage += "column " + index
-    if(i < columnHeads.length-1) consoleMessage += "<br/> "
-  })
-  var htmlTemplate;
-
   var result = {
-    passed: isPassed,
+    passed: passed,
+    title: "Missing Column Headers",
     consoleMessage: consoleMessage,
     htmlTemplate: htmlTemplate
   };
