@@ -20,7 +20,7 @@ function columnsContainNothing(rows, columnHeads) {
     var crow = {} // we make a row to keep track of cells we want to highlight
     columnHeads.forEach(function(columnHead) {
       var cell = row[columnHead];
-      if(cell === "") { 
+      if(cell === "" || cell === null) {
         nothing[columnHead] += 1;
         crow[columnHead] = 1;
       } else {
@@ -46,7 +46,6 @@ function columnsContainNothing(rows, columnHeads) {
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
-    numbers: nothing,
     title: "Empty Cells",
     highlightCells: cells,
     consoleMessage: consoleMessage, // for console rendering

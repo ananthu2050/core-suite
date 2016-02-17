@@ -3,7 +3,7 @@ var percent = require('../utils/percent');
 
 /**
  * Determine the percentage of rows that are numbers for each column
- * 
+ *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
@@ -20,7 +20,7 @@ function columnsContainNumbers(rows, columnHeads) {
     columnHeads.forEach(function(columnHead) {
       var cell = row[columnHead];
       var f = parseFloat(cell);
-      if(f.toString() === cell) { // this will only be true if the cell is a number
+      if(f.toString() === cell || typeof cell === "number") { // this will only be true if the cell is a number
         numbers[columnHead] += 1;
         crow[columnHead] = 1
       } else {
@@ -47,7 +47,6 @@ function columnsContainNumbers(rows, columnHeads) {
 
   var result = {
     passed: true, // this doesn't really fail, as it is mostly an insight
-    numbers: numbers,
     title: "Numeric Cells",
     highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     consoleMessage: consoleMessage,
