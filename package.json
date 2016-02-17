@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dataproofer/core-suite"
+  },
   "keywords": [
     "data",
     "csv",
@@ -17,7 +21,6 @@
     "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "dev-documentation": "^2.0.0",
     "documentation": "^3.0.4"
   }
 }
