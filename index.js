@@ -1,11 +1,11 @@
-// All test suites will have a name and a list 
+// All test suites will have a name and a list
 exports = module.exports = {
   name: "dataproofer-core-suite",
   tests: [],      // the list of main tests to be run in the suite
   subtests: [],   // a list of tests that can be triggered by the main tests but wont be run automatically
 }
 
-/** 
+/**
  * This fooBar function is a placeholder to demonstrate what a test can expect
  * @param  {Array} The rows of the spreadsheet parsed out
  * @param  {String} The raw string of the file
@@ -15,7 +15,7 @@ exports = module.exports = {
 function fooBar(rows, str, input) {
   console.log("fooing some bars", rows.length)
   var result = {
-    // whether or not the 
+    // whether or not the
     passed: false, // REQUIRED FOR RESULT API
     // potential ways of reporting problems
     // we probably just want to use indexes into the dataset
@@ -38,11 +38,10 @@ var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Charac
 var checkDuplicateRows = require('./src/checkDuplicateRows');
 
 exports.tests.push(
-  numberOfRows,
-  numberOfRowsIs65k,
-  checkDuplicateRows,
-  columnsContainNothing,
-  columnsContainNumbers,
-  stringsHaveExactly255Characters
+  // numberOfRows
+  // numberOfRowsIs65k,
+  // checkDuplicateRows,
+  // columnsContainNothing,
+  // columnsContainNumbers,
+  // stringsHaveExactly255Characters
 );
-

@@ -1,5 +1,8 @@
 var _ = require('lodash');
-var percent = require('../utils/percent');
+var percent = function percent(fraction) {
+  var formatPercent = d3.format('.2f')
+  return formatPercent(100*fraction) + "%";
+}
 
 /**
  * Check for any duplicate rows in the spreadsheet. Optionally

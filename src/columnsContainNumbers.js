@@ -1,5 +1,8 @@
 var _ = require('lodash');
-var percent = require('../utils/percent');
+var percent = function percent(fraction) {
+  var formatPercent = d3.format('.2f')
+  return formatPercent(100*fraction) + "%";
+}
 
 /**
  * Determine the percentage of rows that are numbers for each column
