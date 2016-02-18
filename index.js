@@ -38,7 +38,7 @@ var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Charac
 var checkDuplicateRows = require('./src/checkDuplicateRows');
 
 exports.tests.push(
-  // numberOfRows
+  numberOfRows
   // numberOfRowsIs65k,
   // checkDuplicateRows,
   // columnsContainNothing,
