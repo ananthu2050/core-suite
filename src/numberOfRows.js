@@ -12,16 +12,15 @@ var numberOfRows = new DataprooferTest();
 numberOfRows.name('Number of rows')
   .description('A count of the number of rows')
   .methodology(function(rows) {
-    this._count = rows.length
-    var htmlTemplate = _.template(`
+    var newSummary = _.template(`
       <span>This spreadsheet has <%= rows %> rows</span>
     `)({ rows: rows.length });
-    this.summary(htmlTemplate);
+    this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
       name: this.name(),
       description: this.description(),
-      summary: htmlTemplate
+      summary: newSummary
     }
     return result;
   })

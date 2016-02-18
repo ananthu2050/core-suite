@@ -40,7 +40,7 @@ var checkDuplicateRows = require('./src/checkDuplicateRows');
 exports.tests.push(
   numberOfRows,
   numberOfRowsIs65k
-  // checkDuplicateRows,
+  // checkDuplicateRows
   // columnsContainNothing,
   // columnsContainNumbers,
   // stringsHaveExactly255Characters

@@ -12,24 +12,23 @@ var numberOfRowsIs65k = new DataprooferTest();
 numberOfRowsIs65k.name("Potentially missing rows")
   .description("Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)")
   .methodology(function(rows, columnHeads) {
-    var consoleMessage;
-    var htmlTemplate;
+    var newSummary;
     var passed;
     if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included
-      htmlTemplate = _.template(`
+      newSummary = _.template(`
         <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
       `)({ rows: rows.length })
       passed = false;
     } else {
       passed = true;
-      htmlTemplate = "No anomolies detected"
+      newSummary = "No anomolies detected"
     }
-    this.summary(htmlTemplate)
+    this.summary(newSummary)
     var result = {
       passed: passed, // this doesn't really fail, as it is mostly an insight
       name: this.name(),
       description: this.description(),
-      summary: htmlTemplate
+      summary: newSummary
     }
     return result;
   })
