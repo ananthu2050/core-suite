@@ -65,6 +65,7 @@ checkDuplicateRows.name("Duplicate Rows")
       rows: rows
     });
 
+    this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
       name: this.name(),
