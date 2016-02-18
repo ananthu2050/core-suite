@@ -18,8 +18,6 @@ numberOfRows.name('Number of rows')
     this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
-      name: this.name(),
-      description: this.description(),
       summary: newSummary
     }
     return result;
