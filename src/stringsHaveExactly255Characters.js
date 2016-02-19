@@ -48,12 +48,17 @@ stringsHaveExactly255Characters.name("Strings with 255 Characters")
       })
 
       newSummary = _.template(`Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export:<br/>
-      <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(strings[columnHead]) { %>
-        We found <span class="test-value"><%= strings[columnHead] %></span> cells (<%= percent(strings[columnHead]/rows.length) %>) with 255 character-length strings for column <span class="test-column"><%= columnHead %></span><br/>
-        <% } %>
-      <% }) %>
-      `)({ columnHeads: columnHeads, strings: strings, rows: rows, percent: percent })
+        <% _.forEach(columnHeads, function(columnHead) { %>
+          <% if(strings[columnHead]) { %>
+          We found <span class="test-value"><%= strings[columnHead] %></span> cells (<%= percent(strings[columnHead]/rows.length) %>) with 255 character-length strings for column <span class="test-column"><%= columnHead %></span><br/>
+          <% } %>
+        <% }) %>
+      `)({
+        columnHeads: columnHeads,
+        strings: strings,
+        rows: rows,
+        percent: percent
+      });
 
     } else {
       passed = true;
