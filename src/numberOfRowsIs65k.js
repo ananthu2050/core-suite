@@ -14,7 +14,7 @@ numberOfRowsIs65k.name("Potentially missing rows")
   .methodology(function(rows, columnHeads) {
     var newSummary;
     var passed;
-    if(rows.length === 65536 || rows.length === 65535) { // including both for now, not clear if header row should be included
+    if(rows.length === 65536) { 
       newSummary = _.template(`
         <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
       `)({ rows: rows.length })
@@ -26,8 +26,6 @@ numberOfRowsIs65k.name("Potentially missing rows")
     this.summary(newSummary)
     var result = {
       passed: passed, // this doesn't really fail, as it is mostly an insight
-      name: this.name(),
-      description: this.description(),
       summary: newSummary
     }
     return result;

@@ -24,7 +24,8 @@ columnsContainNothing.name("Empty Cells")
     var cells = [] // we will want to mark cells to be highlighted here
     // look through the rows
     rows.forEach(function(row) {
-      var crow = {} // we make a row to keep track of cells we want to highlight
+      // we make a row to keep track of cells we want to highlight
+      var crow = {}
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
         if(cell === "" || cell === null) {
@@ -34,7 +35,8 @@ columnsContainNothing.name("Empty Cells")
           crow[columnHead] = 0;
         }
       })
-      cells.push(crow) // push our marking row onto our cells array
+      // push our marking row onto our cells array
+      cells.push(crow)
     })
 
     var consoleMessage = ", ";
@@ -59,8 +61,6 @@ columnsContainNothing.name("Empty Cells")
     this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
-      name: this.name(),
-      description: this.description(),
       highlightCells: cells,
       summary: newSummary
     }

@@ -26,10 +26,12 @@ checkDuplicateRows.name("Duplicate Rows")
     }
 
     var dupes = {};
-    var cells = [] // we will want to mark cells to be highlighted here
+    // we will want to mark cells to be highlighted here
+    var cells = [];
     // look through the rows
     rows.forEach(function(row,i) {
-      var crow = {} // we make a row to keep track of cells we want to highlight
+      // we make a row to keep track of cells we want to highlight
+      var crow = {}
 
       var hash = "";//
       columns.forEach(function(columnHead) {
@@ -47,7 +49,8 @@ checkDuplicateRows.name("Duplicate Rows")
 
         dupes[hash] = { count: 1, index: i }
       }
-      cells.push(crow) // push our marking row onto our cells array
+      // push our marking row onto our cells array
+      cells.push(crow)
     })
 
     var numDupes = 0;
@@ -68,8 +71,6 @@ checkDuplicateRows.name("Duplicate Rows")
     this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
-      name: this.name(),
-      description: this.description(),
       highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
       summary: newSummary
     };

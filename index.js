@@ -16,7 +16,7 @@ exports.tests.push(
   numberOfRows,
   numberOfRowsIs65k,
   checkDuplicateRows,
-  columnsContainNothing
-  // columnsContainNumbers,
-  // stringsHaveExactly255Characters
+  columnsContainNothing,
+  columnsContainNumbers,
+  stringsHaveExactly255Characters
 );
