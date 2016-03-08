@@ -15,7 +15,6 @@ numberOfRows.name('Number of rows')
     var newSummary = _.template(`
       <span>This spreadsheet has <%= rows %> rows</span>
     `)({ rows: rows.length });
-    this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
       summary: newSummary

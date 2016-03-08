@@ -58,7 +58,6 @@ columnsContainNothing.name("Empty Cells")
       percent: percent
     });
 
-    this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
       highlightCells: cells,
