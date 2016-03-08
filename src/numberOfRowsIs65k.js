@@ -23,7 +23,6 @@ numberOfRowsIs65k.name("Potentially missing rows")
       passed = true;
       newSummary = "No anomolies detected"
     }
-    this.summary(newSummary)
     var result = {
       passed: passed, // this doesn't really fail, as it is mostly an insight
       summary: newSummary

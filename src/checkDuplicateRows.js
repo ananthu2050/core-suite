@@ -68,7 +68,6 @@ checkDuplicateRows.name("Duplicate Rows")
       rows: rows
     });
 
-    this.summary(newSummary);
     var result = {
       passed: true, // this doesn't really fail, as it is mostly an insight
       highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
