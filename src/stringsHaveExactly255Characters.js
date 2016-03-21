@@ -7,14 +7,15 @@ var percent = function percent(fraction) {
 }
 
 /**
- * Determine the cells that have exactly 255 characters (SQL upper limit error)
+ * Determine the cells that have exactly 255 characters (SQL upper limit error). See ProPublica's bad data guide for further information
+ * https://github.com/propublica/guides/blob/master/data-bulletproofing.md#integrity-checks-for-every-data-set
  *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  */
-stringsHaveExactly255Characters.name("Strings with 255 Characters")
-  .description("Determine the cells that have exactly 255 characters (SQL upper limit error)")
+stringsHaveExactly255Characters.name("Words at their character limit")
+  .description("Determine the cells that have exactly 255 characters. Database programs like SQL have a limit to the length of words it can output.")
   .methodology(function(rows, columnHeads) {
     var strings = {};
     columnHeads.forEach(function(columnHead) {
@@ -41,12 +42,6 @@ stringsHaveExactly255Characters.name("Strings with 255 Characters")
     var consoleMessage, newSummary, passed;
     if(has255) {
       passed = false
-      consoleMessage = "Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export: ";
-      columnHeads.forEach(function(columnHead, i) {
-        consoleMessage += columnHead + ": " + strings[columnHead]
-        if(i < columnHeads.length-1) consoleMessage += "<br/> "
-      })
-
       newSummary = _.template(`Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export:<br/>
         <% _.forEach(columnHeads, function(columnHead) { %>
           <% if(strings[columnHead]) { %>
@@ -62,7 +57,7 @@ stringsHaveExactly255Characters.name("Strings with 255 Characters")
 
     } else {
       passed = true;
-      consoleMessage = "No anomolies found with character lengths of cells";
+      newSummary = "No anomolies found with character lengths of cells";
     }
 
     var result = {
