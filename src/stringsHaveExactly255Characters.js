@@ -7,14 +7,15 @@ var percent = function percent(fraction) {
 }
 
 /**
- * Determine the cells that have exactly 255 characters (SQL upper limit error)
+ * Determine the cells that have exactly 255 characters (SQL upper limit error). See ProPublica's bad data guide for further information
+ * https://github.com/propublica/guides/blob/master/data-bulletproofing.md#integrity-checks-for-every-data-set
  *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} result an object describing the result
  */
-stringsHaveExactly255Characters.name("Strings with 255 Characters")
-  .description("Determine the cells that have exactly 255 characters (SQL upper limit error)")
+stringsHaveExactly255Characters.name("Words at their character limit")
+  .description("Determine the cells that have exactly 255 characters. Database programs like SQL have a limit to the length of words it can output.")
   .methodology(function(rows, columnHeads) {
     var strings = {};
     columnHeads.forEach(function(columnHead) {

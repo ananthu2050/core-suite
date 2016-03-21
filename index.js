@@ -5,12 +5,13 @@ exports = module.exports = {
   subtests: [],   // a list of tests that can be triggered by the main tests but wont be run automatically
 }
 
-var numberOfRows = require('./src/numberOfRows');
-var numberOfRowsIs65k = require('./src/numberOfRowsIs65k');
+var checkDuplicateRows = require('./src/checkDuplicateRows');
 var columnsContainNothing = require('./src/columnsContainNothing');
 var columnsContainNumbers = require('./src/columnsContainNumbers');
+var integerEquals2097152 = require('./src/integerEquals2097152');
+var numberOfRows = require('./src/numberOfRows');
+var numberOfRowsIs65k = require('./src/numberOfRowsIs65k');
 var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Characters');
-var checkDuplicateRows = require('./src/checkDuplicateRows');
 
 exports.tests.push(
   numberOfRows,
@@ -18,5 +19,6 @@ exports.tests.push(
   checkDuplicateRows,
   columnsContainNothing,
   columnsContainNumbers,
-  stringsHaveExactly255Characters
+  stringsHaveExactly255Characters,
+  integerEquals2097152
 );
