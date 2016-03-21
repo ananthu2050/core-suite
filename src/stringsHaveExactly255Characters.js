@@ -42,12 +42,6 @@ stringsHaveExactly255Characters.name("Words at their character limit")
     var consoleMessage, newSummary, passed;
     if(has255) {
       passed = false
-      consoleMessage = "Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export: ";
-      columnHeads.forEach(function(columnHead, i) {
-        consoleMessage += columnHead + ": " + strings[columnHead]
-        if(i < columnHeads.length-1) consoleMessage += "<br/> "
-      })
-
       newSummary = _.template(`Warning: we found strings that are exactly 255 characters long. This can indicate an error with a SQL export:<br/>
         <% _.forEach(columnHeads, function(columnHead) { %>
           <% if(strings[columnHead]) { %>
@@ -63,7 +57,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
 
     } else {
       passed = true;
-      consoleMessage = "No anomolies found with character lengths of cells";
+      newSummary = "No anomolies found with character lengths of cells";
     }
 
     var result = {
