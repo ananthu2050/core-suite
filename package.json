@@ -16,7 +16,7 @@
     "excel"
   ],
   "author": "DataProofer <dataproofer@dataproofer.org>",
-  "license": "GNU GPL",
+  "license": "GPL-3.0",
   "dependencies": {
     "lodash": "^4.0.0",
     "dataproofertest": "git@github.com:dataproofer/dataproofertest.js.git"
