@@ -8,7 +8,7 @@ var columnsContainNumbers = new DataprooferTest();
  *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
- * @return {Object} result an object describing the result
+ * @return {Object} describing the result
  */
 columnsContainNumbers.name("Integers at their upper limit")
   .description("If the column contains numbers, make sure it's not 2,097,152. Database programs like SQL have a limit to the size of numbers it can calculate.")

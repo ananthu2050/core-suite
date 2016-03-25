@@ -8,7 +8,7 @@ var checkDuplicateRows = new DataprooferTest();
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @param  {Object} input - accept user input, such as selected Columns
- * @return {Object} result an object describing the result
+ * @return {Object} describing the result
  */
 checkDuplicateRows.name("Duplicate Rows")
   .description("Check for any identical rows in the spreadsheet.")

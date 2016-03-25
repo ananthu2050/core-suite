@@ -7,7 +7,7 @@ var numberOfRowsIs65k = new DataprooferTest();
  *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
- * @return {Object} result an object describing the result
+ * @return {Object} describing the result
  */
 numberOfRowsIs65k.name("Potentially missing rows")
   .description("Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)")
