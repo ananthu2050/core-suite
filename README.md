@@ -1,9 +1,20 @@
 # core-suite
 Core suite of tests for Dataproofer. These tests help detect common indicators of database or Excel cut-offs which may suggest missing data.
 
-* [Documentation](https://github.com/dataproofer/dataproofer/blob/master/README.md)
+* [Documentation](https://github.com/dataproofer/core-suite/blob/master/README.md)
 * [Repository](https://github.com/dataproofer/core-suite/)
 * [Issues](https://github.com/dataproofer/core-suite/issues)
+
+## Table of Contents
+
+* [Tests](https://github.com/dataproofer/core-suite#tests)
+  * [numberOfRowsIs65k.js](https://github.com/dataproofer/core-suite#numberofrowsis65kjs)
+  * [integerEquals2097152.js](https://github.com/dataproofer/core-suite#integerequals2097152js)
+  * [checkDuplicateRows.js](https://github.com/dataproofer/core-suite#checkduplicaterowsjs)
+  * [stringsHaveExactly255Characters.js](https://github.com/dataproofer/core-suite#stringshaveexactly255charactersjs)
+* [Development](https://github.com/dataproofer/core-suite#development)
+  * [Getting started](https://github.com/dataproofer/core-suite#getting-started)
+  * [Documentation](https://github.com/dataproofer/core-suite#documentation)
 
 ## Tests
 
