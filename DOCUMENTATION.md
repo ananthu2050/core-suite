@@ -1,12 +1,3 @@
-# core-suite
-Core suite of tests for DataProofer. These tests help detect common indicators of database or Excel cut-offs which may suggest missing data.
-
-* [Documentation](https://github.com/dataproofer/dataproofer/blob/master/README.md)
-* [Repository](https://github.com/dataproofer/core-suite/)
-* [Issues](https://github.com/dataproofer/core-suite/issues)
-
-## Tests
-
 ### numberOfRowsIs65k.js
 
 [src/numberOfRowsIs65k.js:12-31](https://github.com/dataproofer/core-suite/blob/a3d99a827579bef31cd042ea3902166857712616/src/numberOfRowsIs65k.js#L12-L31 "Source code on GitHub")
@@ -60,21 +51,3 @@ Check for any duplicate rows in the spreadsheet. Optionally
 -   `input` **Object** accept user input, such as selected Columns
 
 Returns **Object** result an object describing the result
-
-
-## Development
-
-### Getting started
-
-```
-git clone git@github.com:dataproofer/dataproofertest-js.git
-cd dataproofertest-js
-npm install
-```
-### Documentation
-
-We use [documentation.js](https://github.com/documentationjs/documentation), but have created a handy script for regenerating documentation.
-
-```
-npm run docs
-```

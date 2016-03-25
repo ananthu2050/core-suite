@@ -4,7 +4,7 @@
   "description": "Core suite of tests for dataproofer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs": "./node_modules/documentation/bin/documentation.js ./src/*.js -f md -g -o DOCUMENTATION.md"
   },
   "repository": {
     "type": "git",
