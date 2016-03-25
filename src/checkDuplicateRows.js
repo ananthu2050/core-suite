@@ -1,10 +1,6 @@
 var _ = require('lodash');
 var DataprooferTest = require('dataproofertest-js');
 var checkDuplicateRows = new DataprooferTest();
-var percent = function percent(fraction) {
-  var formatPercent = d3.format('.2f')
-  return formatPercent(100*fraction) + "%";
-}
 
 /**
  * Check for any duplicate rows in the spreadsheet. Optionally
@@ -31,18 +27,18 @@ checkDuplicateRows.name("Duplicate Rows")
     // look through the rows
     rows.forEach(function(row,i) {
       // we make a row to keep track of cells we want to highlight
-      var crow = {}
+      var currentRow = {}
 
       var hash = "";//
       columns.forEach(function(columnHead) {
         hash += row[columnHead] + "-|o.O|-"
       })
       columnHeads.forEach(function(columnHead) {
-        crow[columnHead] = 0
+        currentRow[columnHead] = 0
       })
       if(dupes[hash]) {
         columns.forEach(function(columnHead) {
-          crow[columnHead] = 1
+          currentRow[columnHead] = 1
         })
         dupes[hash].count++;
       } else {
@@ -50,7 +46,7 @@ checkDuplicateRows.name("Duplicate Rows")
         dupes[hash] = { count: 1, index: i }
       }
       // push our marking row onto our cells array
-      cells.push(crow)
+      cells.push(currentRow)
     })
 
     var numDupes = 0;

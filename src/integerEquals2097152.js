@@ -1,10 +1,7 @@
 var _ = require('lodash');
 var DataprooferTest = require('dataproofertest-js');
+var util = require('dataproofertest-js/util');
 var columnsContainNumbers = new DataprooferTest();
-var percent = function percent(fraction) {
-  var formatPercent = d3.format('.2f')
-  return formatPercent(100*fraction) + "%";
-}
 
 /**
  * Integers at their upper limit
@@ -24,20 +21,20 @@ columnsContainNumbers.name("Integers at their upper limit")
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
-      var crow = {}
+      var currentRow = {}
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
         var f = parseFloat(cell);
         // this will only be true if the cell is a number
         if((f.toString() === cell || typeof cell === "number") && f === 2097152) {
             numbers[columnHead] += 1;
-            crow[columnHead] = 1
+            currentRow[columnHead] = 1
         } else {
-          crow[columnHead] = 0
+          currentRow[columnHead] = 0
         }
       })
       // push our marking row onto our cells array
-      cells.push(crow)
+      cells.push(currentRow)
     })
 
     var consoleMessage = "# of rows for each column with number values:<br/> ";
@@ -56,7 +53,7 @@ columnsContainNumbers.name("Integers at their upper limit")
       columnHeads: columnHeads,
       numbers: numbers,
       rows: rows,
-      percent: percent
+      percent: util.percent
     });
 
     var result = {

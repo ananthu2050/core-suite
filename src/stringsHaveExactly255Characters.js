@@ -1,10 +1,7 @@
 var _ = require('lodash');
 var DataprooferTest = require('dataproofertest-js');
+var util = require('dataproofertest-js/util');
 var stringsHaveExactly255Characters = new DataprooferTest();
-var percent = function percent(fraction) {
-  var formatPercent = d3.format('.2f')
-  return formatPercent(100*fraction) + "%";
-}
 
 /**
  * Determine the cells that have exactly 255 characters (SQL upper limit error). See ProPublica's bad data guide for further information
@@ -25,18 +22,18 @@ stringsHaveExactly255Characters.name("Words at their character limit")
     var has255 = false
     // look through the rows
     rows.forEach(function(row) {
-      var crow = {} // we make a row to keep track of cells we want to highlight
+      var currentRow = {} // we make a row to keep track of cells we want to highlight
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
         if(cell.length === 255) {
-          crow[columnHead] = 1
+          currentRow[columnHead] = 1
           strings[columnHead] += 1
           has255 = true; // we want to know if it occurrs at least once
         } else {
-          crow[columnHead] = 0
+          currentRow[columnHead] = 0
         }
       })
-      cells.push(crow) // push our marking row onto our cells array
+      cells.push(currentRow) // push our marking row onto our cells array
     })
 
     var consoleMessage, newSummary, passed;
@@ -52,7 +49,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
         columnHeads: columnHeads,
         strings: strings,
         rows: rows,
-        percent: percent
+        percent: util.percent
       });
 
     } else {
