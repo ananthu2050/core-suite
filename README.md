@@ -48,7 +48,7 @@ Returns **Object** describing the result
 
 [src/checkDuplicateRows.js:13-73](https://github.com/dataproofer/core-suite/blob/b45d4fbd12f1b6c80c2dc14ba89c4dcbcce9a078/src/checkDuplicateRows.js#L13-L73 "Source code on GitHub")
 
-Check for any duplicate rows in the spreadsheet. Optionally
+Check for any duplicate rows in the spreadsheet.
 
 **Parameters**
 
