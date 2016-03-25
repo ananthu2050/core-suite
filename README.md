@@ -13,8 +13,9 @@ Core suite of tests for Dataproofer. These tests help detect common indicators o
   * [checkDuplicateRows.js](https://github.com/dataproofer/core-suite#checkduplicaterowsjs)
   * [stringsHaveExactly255Characters.js](https://github.com/dataproofer/core-suite#stringshaveexactly255charactersjs)
 * [Development](https://github.com/dataproofer/core-suite#development)
-  * [Getting started](https://github.com/dataproofer/core-suite#getting-started)
-  * [Documentation](https://github.com/dataproofer/core-suite#documentation)
+  * [Getting Started](https://github.com/dataproofer/core-suite#getting-started)
+  * [Writing Tests](https://github.com/dataproofer/stats-suite#writing-tests)
+  * [Building Docs](https://github.com/dataproofer/core-suite#building-docs)
 
 ## Tests
 
@@ -74,17 +75,28 @@ Returns **Object** describing the result
 
 ## Development
 
-### Getting started
+### Getting Started
 
 ```
-git clone git@github.com:dataproofer/dataproofertest-js.git
-cd dataproofertest-js
+git clone git@github.com:dataproofer/core-suite.git
+cd core-suite
 npm install
 ```
-### Documentation
+
+### Writing Tests
+
+* [How to](https://github.com/dataproofer/Dataproofer#creating-a-new-test)
+* [Helper Scripts](https://github.com/dataproofer/dataproofertest-js/blob/master/DOCUMENTATION.md#util)
+* Templates
+  * [Basic Test](https://github.com/dataproofer/suite-template/blob/master/src/myTest.js)
+  * [Advanced Test](https://github.com/dataproofer/suite-template/blob/master/src/myAdvancedTest.js)
+
+### Building Docs
 
 We use [documentation.js](https://github.com/documentationjs/documentation), but have created a handy script for regenerating documentation.
 
 ```
 npm run docs
 ```
+
+Then open up and check your docs in [DOCUMENTATION.md](https://github.com/dataproofer/info-suite/blob/master/DOCUMENTATION.md)
