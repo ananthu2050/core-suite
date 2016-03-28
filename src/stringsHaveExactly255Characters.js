@@ -58,7 +58,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
     }
 
     var result = {
-      passed: true, // this doesn't really fail, as it is mostly an insight
+      passed: passed,
       highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
       summary: newSummary
     }
