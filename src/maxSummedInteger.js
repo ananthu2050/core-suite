@@ -1,23 +1,27 @@
 var _ = require('lodash');
 var DataprooferTest = require('dataproofertest-js');
 var util = require('dataproofertest-js/util');
-var columnsContainNumbers = new DataprooferTest();
+var maxSummedInteger = new DataprooferTest();
 
 /**
- * Integers at their upper limit
+ * Indicates a summed integers at its upper limit of 2,097,152.
+ * Please see the [Integrity Checks](https://github.com/propublica/guides/blob/master/data-bulletproofing.md#integrity-checks-for-every-data-set) section of the ProPublica [Data Bulletproofing Guide](https://github.com/propublica/guides/blob/master/data-bulletproofing.md) for more information.
+ *
  *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} describing the result
  */
-columnsContainNumbers.name("Integers at their upper limit")
-  .description("If the column contains numbers, make sure it's not 2,097,152. Database programs like SQL have a limit to the size of numbers it can calculate.")
+maxSummedInteger.name("Summed integers at their upper limit")
+  .description("If a column contains numbers, make sure it's not 2,097,152. Common database programs like MySQL limit to the size of numbers it can calculate.")
   .methodology(function(rows, columnHeads) {
-    var numbers = {};
+    var maxSummedInts = {};
     columnHeads.forEach(function(columnHead) {
-      numbers[columnHead] = 0;
-    })
-    var cells = [] // we will want to mark cells to be highlighted here
+      maxSummedInts[columnHead] = 0;
+    });
+    // we will want to mark cells to be highlighted here
+    var cells = [];
+    var passed = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -27,41 +31,43 @@ columnsContainNumbers.name("Integers at their upper limit")
         var f = parseFloat(cell);
         // this will only be true if the cell is a number
         if((f.toString() === cell || typeof cell === "number") && f === 2097152) {
-            numbers[columnHead] += 1;
-            currentRow[columnHead] = 1
+            maxSummedInts[columnHead] += 1;
+            currentRow[columnHead] = 1;
         } else {
           currentRow[columnHead] = 0
         }
       })
       // push our marking row onto our cells array
       cells.push(currentRow)
-    })
+    });
 
-    var consoleMessage = "# of rows for each column with number values:<br/> ";
-    columnHeads.forEach(function(columnHead, i) {
-      consoleMessage += columnHead + ": " + numbers[columnHead]
-      if(i < columnHeads.length-1) consoleMessage += "<br/> "
-    })
+    // check if we found any max ints
+    // and change the value of passed to reflect that
+    if (_.isEmpty(maxSummedInts) {
+      passed = true;
+    else{
+      passed = false;
+    }
 
     var newSummary = _.template(`
       <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(numbers[columnHead]) { %>
-        We found <span class="test-value"><%= numbers[columnHead] %></span> cells (<%= percent(numbers[columnHead]/rows.length) %>) with a numeric value for column <span class="test-column"><%= columnHead %></span><br/>
+        <% if(maxSummedInts[columnHead]) { %>
+        <p class="test-value"><%= maxSummedInts[columnHead] %></span> cells (<%= percent(maxSummedInts[columnHead]/rows.length) %>) with a maximum summed integer in <span class="test-column"><%= columnHead %></p>
         <% } %>
       <% }) %>
     `)({
       columnHeads: columnHeads,
-      numbers: numbers,
+      maxSummedInts: maxSummedInts,
       rows: rows,
       percent: util.percent
     });
 
     var result = {
-      passed: true, // this doesn't really fail, as it is mostly an insight
+      passed: passed,
       highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
       summary: newSummary
     }
     return result;
   });
 
-module.exports = columnsContainNumbers;
+module.exports = maxSummedInteger;

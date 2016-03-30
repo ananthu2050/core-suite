@@ -7,13 +7,15 @@ exports = module.exports = {
 }
 
 var checkDuplicateRows = require('./src/checkDuplicateRows');
-var integerEquals2097152 = require('./src/integerEquals2097152');
 var numberOfRowsIs65k = require('./src/numberOfRowsIs65k');
 var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Characters');
+var maxSummedInteger = require('./src/maxSummedInteger');
+var maxInteger = require('./src/maxInteger');
 
 exports.tests.push(
   numberOfRowsIs65k,
   checkDuplicateRows,
   stringsHaveExactly255Characters,
-  integerEquals2097152
+  maxSummedInteger,
+  maxInteger
 );
