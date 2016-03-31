@@ -52,7 +52,7 @@ maxInteger.name("Integers at their upper limit")
     var newSummary = _.template(`
       <% _.forEach(columnHeads, function(columnHead) { %>
         <% if(maxInts[columnHead]) { %>
-        <p class="test-value"><%= maxInts[columnHead] %></span> cells (<%= percent(maxInts[columnHead]/rows.length) %>) with a maximum summed integer in <span class="test-column"><%= columnHead %></p>
+        <p class="test-value"><%= maxInts[columnHead] %></span> cells (<%= percent(maxInts[columnHead]/rows.length) %>) with a maximum integer in <span class="test-column"><%= columnHead %></p>
         <% } %>
       <% }) %>
     `)({
