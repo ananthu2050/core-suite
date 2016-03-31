@@ -11,9 +11,9 @@ Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)
 
 Returns **Object** describing the result
 
-### integerEquals2097152.js
+### maxSummedInteger.js
 
-[src/integerEquals2097152.js:13-65](https://github.com/dataproofer/core-suite/blob/master/src/integerEquals2097152.js#L13-L65 "Source code on GitHub")
+[src/maxSummedInteger.js:13-65](https://github.com/dataproofer/core-suite/blob/master/src/maxSummedInteger.js#L13-L65 "Source code on GitHub")
 
 Integers at their upper limit
 
