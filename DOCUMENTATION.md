@@ -15,7 +15,8 @@ Returns **Object** describing the result
 
 [src/maxSummedInteger.js:13-65](https://github.com/dataproofer/core-suite/blob/master/src/maxSummedInteger.js#L13-L65 "Source code on GitHub")
 
-Integers at their upper limit
+Integers at an upper limit, according to ProPublica's bad data guide:
+<https://github.com/propublica/guides/blob/master/data-bulletproofing.md#integrity-checks-for-every-data-set>
 
 **Parameters**
 
