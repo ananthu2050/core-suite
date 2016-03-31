@@ -1,6 +1,6 @@
-var _ = require('lodash');
-var DataprooferTest = require('dataproofertest-js');
-var util = require('dataproofertest-js/util');
+var _ = require("lodash");
+var DataprooferTest = require("dataproofertest-js");
+var util = require("dataproofertest-js/util");
 var maxInteger = new DataprooferTest();
 
 /**
@@ -25,27 +25,27 @@ maxInteger.name("Integers at their upper limit")
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
-      var currentRow = {}
+      var currentRow = {};
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
         var f = parseFloat(cell);
         // this will only be true if the cell is a number
         if((f.toString() === cell || typeof cell === "number") && f === 2147483647) {
-            maxInts[columnHead] += 1;
-            currentRow[columnHead] = 1;
+          maxInts[columnHead] += 1;
+          currentRow[columnHead] = 1;
         } else {
-          currentRow[columnHead] = 0
+          currentRow[columnHead] = 0;
         }
-      })
+      });
       // push our marking row onto our cells array
-      cells.push(currentRow)
+      cells.push(currentRow);
     });
 
     // check if we found any max ints
     // and change the value of passed to reflect that
-    if (_.isEmpty(maxInts) {
+    if (_.isEmpty(maxInts)) {
       passed = true;
-    else{
+    } else {
       passed = false;
     }
 
@@ -66,7 +66,7 @@ maxInteger.name("Integers at their upper limit")
       passed: passed,
       highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
       summary: newSummary
-    }
+    };
     return result;
   });
 
