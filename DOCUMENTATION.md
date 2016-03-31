@@ -11,6 +11,17 @@ Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)
 
 Returns **Object** describing the result
 
+### maxSmallInteger.js
+
+[src/maxSmallInteger.js:15-71](https://github.com/dataproofer/core-suite/blob/master/src/maxSmallInteger.js#L15-L71 "Source code on GitHub")
+
+Integers at an upper limit when stored in [MySQL](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html) or [PostgreSQL](http://www.postgresql.org/docs/9.5/interactive/datatype-numeric.html) `smallint` fields
+
+**Parameters**
+
+-   `rows` **Array** an array of objects representing rows in the spreadsheet
+-   `columnHeads` **Array** an array of strings for column names of the spreadsheet
+
 ### maxSummedInteger.js
 
 [src/maxSummedInteger.js:13-65](https://github.com/dataproofer/core-suite/blob/master/src/maxSummedInteger.js#L13-L65 "Source code on GitHub")
