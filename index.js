@@ -11,11 +11,13 @@ var numberOfRowsIs65k = require('./src/numberOfRowsIs65k');
 var stringsHaveExactly255Characters = require('./src/stringsHaveExactly255Characters');
 var maxSummedInteger = require('./src/maxSummedInteger');
 var maxInteger = require('./src/maxInteger');
+var maxSmallInteger = require('./src/maxSmallInteger');
 
 exports.tests.push(
   numberOfRowsIs65k,
   checkDuplicateRows,
   stringsHaveExactly255Characters,
   maxSummedInteger,
-  maxInteger
+  maxInteger,
+  maxSmallInteger
 );
