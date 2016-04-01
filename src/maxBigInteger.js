@@ -12,7 +12,7 @@ var maxBigInteger = new DataprooferTest();
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} describing the result
  */
-maxBigInteger.name("Big integers at their upper limit")
+maxBigInteger.name("Big integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 9,223,372,036,854,775,807 or 18,446,744,073,709,551,616. Common database programs like MySQL and PostgreSQL limit to the size of numbers it can store.")
   .methodology(function(rows, columnHeads) {
     var maxBigInts = {};
@@ -28,11 +28,13 @@ maxBigInteger.name("Big integers at their upper limit")
       var currentRow = {};
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
-        var f = parseFloat(cell);
+        var strippedCell = util.stripNumeric(cell);
+        var f = parseFloat(strippedCell);
         // this will only be true if the cell is a number
-        if((f.toString() === cell || typeof cell === "number") && (f === 9223372036854775807 || f === 18446744073709551615)) {
+        if((typeof f === "number") && (f === 9223372036854775807 || f === 18446744073709551615)) {
           maxBigInts[columnHead] += 1;
           currentRow[columnHead] = 1;
+          passed = false;
         } else {
           currentRow[columnHead] = 0;
         }
@@ -40,14 +42,6 @@ maxBigInteger.name("Big integers at their upper limit")
       // push our marking row onto our cells array
       cells.push(currentRow);
     });
-
-    // check if we found any max ints
-    // and change the value of passed to reflect that
-    if (_.isEmpty(maxBigInts)) {
-      passed = true;
-    } else {
-      passed = false;
-    }
 
     var newSummary = _.template(`
       <% _.forEach(columnHeads, function(columnHead) { %>

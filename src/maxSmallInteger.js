@@ -12,7 +12,7 @@ var maxSmallInteger = new DataprooferTest();
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} describing the result
  */
-maxSmallInteger.name("Small integers at their upper limit")
+maxSmallInteger.name("Small integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 65,535 or 32,767. Common database programs like MySQL limit to the size of numbers it can store.")
   .methodology(function(rows, columnHeads) {
     var maxSmallInts = {};
@@ -28,11 +28,13 @@ maxSmallInteger.name("Small integers at their upper limit")
       var currentRow = {};
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
-        var f = parseFloat(cell);
+        var strippedCell = util.stripNumeric(cell);
+        var f = parseFloat(strippedCell);
         // this will only be true if the cell is a number
-        if((f.toString() === cell || typeof cell === "number") && (f === 32767 || f === 65535)) {
+        if((typeof f === "number") && (f === 32767 || f === 65535)) {
           maxSmallInts[columnHead] += 1;
           currentRow[columnHead] = 1;
+          passed = false;
         } else {
           currentRow[columnHead] = 0;
         }
@@ -40,14 +42,6 @@ maxSmallInteger.name("Small integers at their upper limit")
       // push our marking row onto our cells array
       cells.push(currentRow);
     });
-
-    // check if we found any max ints
-    // and change the value of passed to reflect that
-    if (_.isEmpty(maxSmallInts)) {
-      passed = true;
-    } else {
-      passed = false;
-    }
 
     var newSummary = _.template(`
       <% _.forEach(columnHeads, function(columnHead) { %>
