@@ -1,5 +1,5 @@
 # core-suite
-Core suite of tests for Dataproofer. These tests help detect common indicators of database or Excel cut-offs which may suggest missing data.
+Core suite of tests for Dataproofer. These tests relate to common problems and data checks — namely, making sure data has not been truncated by looking for specific cut-off indicators.
 
 * [Documentation](https://github.com/dataproofer/core-suite/blob/master/README.md)
 * [Repository](https://github.com/dataproofer/core-suite/)
