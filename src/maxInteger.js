@@ -4,7 +4,7 @@ var util = require("dataproofertest-js/util");
 var maxInteger = new DataprooferTest();
 
 /**
- * Indicates an integer at its upper MySQL limit 2,147,483,647.
+ * Indicates a integer at its upper signed limit is 2,147,483,647 (MySQL or PostgreSQL) or its upper unsigned limit (MySQL) of 4,294,967,295.
  * Common database programs, like MySQL, have a cap on how big of a number it can save.
  * Please see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html) for more information.
  *
@@ -13,7 +13,7 @@ var maxInteger = new DataprooferTest();
  * @return {Object} describing the result
  */
 maxInteger.name("Integers at their upper limit")
-  .description("If a column contains numbers, make sure it's not 2,147,483,647. Common database programs like MySQL limit to the size of numbers it can calculate.")
+  .description("If a column contains numbers, make sure it's not 2,147,483,647 or 4,294,967,295. Common database programs like like MySQL and PostgreSQL limit to the size of numbers it can calculate.")
   .methodology(function(rows, columnHeads) {
     var maxInts = {};
     columnHeads.forEach(function(columnHead) {
@@ -30,7 +30,7 @@ maxInteger.name("Integers at their upper limit")
         var cell = row[columnHead];
         var f = parseFloat(cell);
         // this will only be true if the cell is a number
-        if((f.toString() === cell || typeof cell === "number") && f === 2147483647) {
+        if((f.toString() === cell || typeof cell === "number") && (f === 2147483647 || f === 4294967295)) {
           maxInts[columnHead] += 1;
           currentRow[columnHead] = 1;
         } else {

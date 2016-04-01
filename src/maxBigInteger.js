@@ -1,10 +1,10 @@
 var _ = require("lodash");
 var DataprooferTest = require("dataproofertest-js");
 var util = require("dataproofertest-js/util");
-var maxSmallInteger = new DataprooferTest();
+var maxBigInteger = new DataprooferTest();
 
 /**
- * Indicates an `smallint` at its upper signed limit (MySQL or PostgreSQL) of 32,767 or its upper unsigned limit (MySQL) of 65,535.
+ * Indicates an `bigint` at its upper signed limit (MySQL or PostgreSQL) of 9,223,372,036,854,775,807 or its upper unsigned limit (MySQL) of 18,446,744,073,709,551,616.
  * Common database programs, like MySQL, have a cap on how big of a number it can save.
  * Please see the [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html) or [PostgreSQL documentation](http://www.postgresql.org/docs/9.5/interactive/datatype-numeric.html) for more information.
  *
@@ -12,12 +12,12 @@ var maxSmallInteger = new DataprooferTest();
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
  * @return {Object} describing the result
  */
-maxSmallInteger.name("Small integers at their upper limit")
-  .description("If a column contains numbers, make sure it's not 65,535 or 32,767. Common database programs like MySQL limit to the size of numbers it can store.")
+maxBigInteger.name("Big integers at their upper limit")
+  .description("If a column contains numbers, make sure it's not 9,223,372,036,854,775,807 or 18,446,744,073,709,551,616. Common database programs like MySQL and PostgreSQL limit to the size of numbers it can store.")
   .methodology(function(rows, columnHeads) {
-    var maxSmallInts = {};
+    var maxBigInts = {};
     columnHeads.forEach(function(columnHead) {
-      maxSmallInts[columnHead] = 0;
+      maxBigInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
     var cells = [];
@@ -30,8 +30,8 @@ maxSmallInteger.name("Small integers at their upper limit")
         var cell = row[columnHead];
         var f = parseFloat(cell);
         // this will only be true if the cell is a number
-        if((f.toString() === cell || typeof cell === "number") && (f === 32767 || f === 65535)) {
-          maxSmallInts[columnHead] += 1;
+        if((f.toString() === cell || typeof cell === "number") && (f === 9223372036854775807 || f === 18446744073709551615)) {
+          maxBigInts[columnHead] += 1;
           currentRow[columnHead] = 1;
         } else {
           currentRow[columnHead] = 0;
@@ -43,7 +43,7 @@ maxSmallInteger.name("Small integers at their upper limit")
 
     // check if we found any max ints
     // and change the value of passed to reflect that
-    if (_.isEmpty(maxSmallInts)) {
+    if (_.isEmpty(maxBigInts)) {
       passed = true;
     } else {
       passed = false;
@@ -51,13 +51,13 @@ maxSmallInteger.name("Small integers at their upper limit")
 
     var newSummary = _.template(`
       <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(maxSmallInts[columnHead]) { %>
-        <p class="test-value"><%= maxSmallInts[columnHead] %></span> cells (<%= percent(maxSmallInts[columnHead]/rows.length) %>) with a maximum small integer value in <span class="test-column"><%= columnHead %></p>
+        <% if(maxBigInts[columnHead]) { %>
+        <p class="test-value"><%= maxBigInts[columnHead] %></span> cells (<%= percent(maxBigInts[columnHead]/rows.length) %>) with a maximum big integer value in <span class="test-column"><%= columnHead %></p>
         <% } %>
       <% }) %>
     `)({
       columnHeads: columnHeads,
-      maxSmallInts: maxSmallInts,
+      maxBigInts: maxBigInts,
       rows: rows,
       percent: util.percent
     });
@@ -70,4 +70,4 @@ maxSmallInteger.name("Small integers at their upper limit")
     return result;
   });
 
-module.exports = maxSmallInteger;
+module.exports = maxBigInteger;
