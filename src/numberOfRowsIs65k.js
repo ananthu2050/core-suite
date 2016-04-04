@@ -14,7 +14,7 @@ numberOfRowsIs65k.name("Potentially missing rows")
   .methodology(function(rows, columnHeads) {
     var newSummary;
     var passed;
-    if(rows.length === 65536) { 
+    if(rows.length === 65536) {
       newSummary = _.template(`
         <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
       `)({ rows: rows.length })

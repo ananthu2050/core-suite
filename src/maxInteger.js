@@ -31,7 +31,7 @@ maxInteger.name("Integer at its SQL upper limit")
         var strippedCell = util.stripNumeric(cell);
         var f = parseFloat(strippedCell);
         // this will only be true if the cell is a number
-        console.log("f", f);
+        //console.log("f", f);
         if((typeof f === "number") && (f === 2147483647 || f === 4294967295)) {
           maxInts[columnHead] += 1;
           currentRow[columnHead] = 1;

@@ -25,7 +25,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
       var currentRow = {} // we make a row to keep track of cells we want to highlight
       columnHeads.forEach(function(columnHead) {
         var cell = row[columnHead];
-        if(cell.length === 255) {
+        if(cell && cell.length === 255) {
           currentRow[columnHead] = 1
           strings[columnHead] += 1
           has255 = true; // we want to know if it occurrs at least once
