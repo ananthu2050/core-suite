@@ -37,7 +37,6 @@ stringsHaveExactly255Characters.name("Words at their character limit")
 
     if(has255) {
       didPass = false;
-
     } else {
       didPass = true;
     }
