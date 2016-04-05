@@ -20,7 +20,7 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
       maxSmallInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
-    var cells = [];
+    var cellsToHighlight = [];
     var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
@@ -40,12 +40,12 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
         }
       });
       // push our marking row onto our cells array
-      cells.push(currentRow);
+      cellsToHighlight.push(currentRow);
     });
 
     var result = {
       passed: didPass,
-      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });

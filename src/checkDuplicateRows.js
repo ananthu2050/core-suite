@@ -24,7 +24,7 @@ checkDuplicateRows.name("Duplicate Rows")
 
     var dupes = {};
     // we will want to mark cells to be highlighted here
-    var cells = [];
+    var cellsToHighlight = [];
     // look through the rows
     rows.forEach(function(row,i) {
       // we make a row to keep track of cells we want to highlight
@@ -48,7 +48,7 @@ checkDuplicateRows.name("Duplicate Rows")
         dupes[hash] = { count: 1, index: i };
       }
       // push our marking row onto our cells array
-      cells.push(currentRow);
+      cellsToHighlight.push(currentRow);
     });
 
     var numDupes = 0;
@@ -59,8 +59,8 @@ checkDuplicateRows.name("Duplicate Rows")
     });
 
     var result = {
-      passed: didPass, // this doesn't really fail, as it is mostly an insight
-      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
+      passed: didPass,
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });

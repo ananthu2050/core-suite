@@ -20,7 +20,7 @@ maxSummedInteger.name("Summed integer at its upper limit")
       maxSummedInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
-    var cells = [];
+    var cellsToHighlight = [];
     var passed = true;
     // look through the rows
     rows.forEach(function(row) {
@@ -40,12 +40,12 @@ maxSummedInteger.name("Summed integer at its upper limit")
         }
       });
       // push our marking row onto our cells array
-      cells.push(currentRow);
+      cellsToHighlight.push(currentRow);
     });
 
     var result = {
       passed: passed,
-      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });

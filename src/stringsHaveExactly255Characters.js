@@ -16,7 +16,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
     columnHeads.forEach(function(columnHead) {
       strings[columnHead] = 0;
     });
-    var cells = []; // we will want to mark cells to be highlighted here
+    var cellsToHighlight = []; // we will want to mark cells to be highlighted here
     var has255 = false;
     var didPass = true;
     // look through the rows
@@ -32,7 +32,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
           currentRow[columnHead] = 0;
         }
       });
-      cells.push(currentRow); // push our marking row onto our cells array
+      cellsToHighlight.push(currentRow); // push our marking row onto our cells array
     });
 
     if(has255) {
@@ -44,7 +44,7 @@ stringsHaveExactly255Characters.name("Words at their character limit")
 
     var result = {
       passed: didPass,
-      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });
