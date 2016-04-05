@@ -22,6 +22,8 @@
     "dataproofertest": "git://github.com/dataproofer/dataproofertest.js.git"
   },
   "devDependencies": {
-    "documentation": "^3.0.4"
+    "babel-eslint": "^6.0.2",
+    "documentation": "^3.0.4",
+    "eslint": "^2.7.0"
   }
 }

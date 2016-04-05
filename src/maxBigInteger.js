@@ -1,4 +1,3 @@
-var _ = require("lodash");
 var DataprooferTest = require("dataproofertest-js");
 var util = require("dataproofertest-js/util");
 var maxBigInteger = new DataprooferTest();
@@ -14,6 +13,7 @@ var maxBigInteger = new DataprooferTest();
  */
 maxBigInteger.name("Big integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 9,223,372,036,854,775,807 or 18,446,744,073,709,551,616. Common database programs like MySQL and PostgreSQL limit to the size of numbers it can store.")
+  .conclusion("Inquire about this error with the dataset's maintainer")
   .methodology(function(rows, columnHeads) {
     var maxBigInts = {};
     columnHeads.forEach(function(columnHead) {
@@ -21,7 +21,7 @@ maxBigInteger.name("Big integer at its SQL upper limit")
     });
     // we will want to mark cells to be highlighted here
     var cells = [];
-    var passed = true;
+    var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -34,7 +34,7 @@ maxBigInteger.name("Big integer at its SQL upper limit")
         if((typeof f === "number") && (f === 9223372036854775807 || f === 18446744073709551615)) {
           maxBigInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          passed = false;
+          didPass = false;
         } else {
           currentRow[columnHead] = 0;
         }
@@ -43,23 +43,9 @@ maxBigInteger.name("Big integer at its SQL upper limit")
       cells.push(currentRow);
     });
 
-    var newSummary = _.template(`
-      <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(maxBigInts[columnHead]) { %>
-        <p class="test-value"><%= maxBigInts[columnHead] %></span> cells (<%= percent(maxBigInts[columnHead]/rows.length) %>) with a maximum big integer value in <span class="test-column"><%= columnHead %></p>
-        <% } %>
-      <% }) %>
-    `)({
-      columnHeads: columnHeads,
-      maxBigInts: maxBigInts,
-      rows: rows,
-      percent: util.percent
-    });
-
     var result = {
-      passed: passed,
-      highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
-      summary: newSummary
+      passed: didPass,
+      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });

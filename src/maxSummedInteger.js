@@ -1,4 +1,3 @@
-var _ = require("lodash");
 var DataprooferTest = require("dataproofertest-js");
 var util = require("dataproofertest-js/util");
 var maxSummedInteger = new DataprooferTest();
@@ -14,6 +13,7 @@ var maxSummedInteger = new DataprooferTest();
  */
 maxSummedInteger.name("Summed integer at its upper limit")
   .description("If a column contains numbers, make sure it's not 2,097,152. Common database programs like MySQL limit to the size of numbers it can calculate.")
+  .conclusion("Inquire about this error with the dataset's maintainer")
   .methodology(function(rows, columnHeads) {
     var maxSummedInts = {};
     columnHeads.forEach(function(columnHead) {
@@ -43,23 +43,9 @@ maxSummedInteger.name("Summed integer at its upper limit")
       cells.push(currentRow);
     });
 
-    var newSummary = _.template(`
-      <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(maxSummedInts[columnHead]) { %>
-        <p class="test-value"><%= maxSummedInts[columnHead] %></span> cells (<%= percent(maxSummedInts[columnHead]/rows.length) %>) with a maximum summed integer in <span class="test-column"><%= columnHead %></p>
-        <% } %>
-      <% }) %>
-    `)({
-      columnHeads: columnHeads,
-      maxSummedInts: maxSummedInts,
-      rows: rows,
-      percent: util.percent
-    });
-
     var result = {
       passed: passed,
-      highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
-      summary: newSummary
+      highlightCells: cells // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });
