@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var DataprooferTest = require("dataproofertest-js");
 var numberOfRowsIs65k = new DataprooferTest();
 
@@ -11,23 +10,16 @@ var numberOfRowsIs65k = new DataprooferTest();
  */
 numberOfRowsIs65k.name("Potentially missing rows")
   .description("Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)")
+  .conclusion("Inquire about this error with the dataset's maintainer")
   .methodology(function(rows, columnHeads) {
-    var newSummary;
-    var passed;
+    var didPass = true;
     if(rows.length === 65536) {
-      newSummary = _.template(`
-        <span class="warning">This spreadsheet has <%= rows %> rows, a common cutoff point for Excel indicating your dataset may be missing rows.</span>
-      `)({ rows: rows.length })
-      passed = false;
-    } else {
-      passed = true;
-      newSummary = "No anomolies detected"
+      didPass = false;
     }
     var result = {
-      passed: passed, // this doesn't really fail, as it is mostly an insight
-      summary: newSummary
-    }
+      passed: didPass // this doesn't really fail, as it is mostly an insight
+    };
     return result;
-  })
+  });
 
 module.exports = numberOfRowsIs65k;

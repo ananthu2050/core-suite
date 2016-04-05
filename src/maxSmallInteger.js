@@ -1,4 +1,3 @@
-var _ = require("lodash");
 var DataprooferTest = require("dataproofertest-js");
 var util = require("dataproofertest-js/util");
 var maxSmallInteger = new DataprooferTest();
@@ -14,14 +13,15 @@ var maxSmallInteger = new DataprooferTest();
  */
 maxSmallInteger.name("Small integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 65,535 or 32,767. Common database programs like MySQL limit to the size of numbers it can store.")
+  .conclusion("Inquire about this error with the dataset's maintainer")
   .methodology(function(rows, columnHeads) {
     var maxSmallInts = {};
     columnHeads.forEach(function(columnHead) {
       maxSmallInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
-    var cells = [];
-    var passed = true;
+    var cellsToHighlight = [];
+    var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -34,32 +34,18 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
         if((typeof f === "number") && (f === 32767 || f === 65535)) {
           maxSmallInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          passed = false;
+          didPass = false;
         } else {
           currentRow[columnHead] = 0;
         }
       });
       // push our marking row onto our cells array
-      cells.push(currentRow);
-    });
-
-    var newSummary = _.template(`
-      <% _.forEach(columnHeads, function(columnHead) { %>
-        <% if(maxSmallInts[columnHead]) { %>
-        <p class="test-value"><%= maxSmallInts[columnHead] %></span> cells (<%= percent(maxSmallInts[columnHead]/rows.length) %>) with a maximum small integer value in <span class="test-column"><%= columnHead %></p>
-        <% } %>
-      <% }) %>
-    `)({
-      columnHeads: columnHeads,
-      maxSmallInts: maxSmallInts,
-      rows: rows,
-      percent: util.percent
+      cellsToHighlight.push(currentRow);
     });
 
     var result = {
-      passed: passed,
-      highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
-      summary: newSummary
+      passed: didPass,
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });

@@ -1,5 +1,4 @@
-var _ = require('lodash');
-var DataprooferTest = require('dataproofertest-js');
+var DataprooferTest = require("dataproofertest-js");
 var checkDuplicateRows = new DataprooferTest();
 
 /**
@@ -11,8 +10,10 @@ var checkDuplicateRows = new DataprooferTest();
  * @return {Object} describing the result
  */
 checkDuplicateRows.name("Duplicate Rows")
-  .description("Check for any identical rows in the spreadsheet.")
+  .description("Check for any identical rows in the spreadsheet")
+  .conclusion("Inquire about this error with the dataset's maintainer")
   .methodology(function(rows, columnHeads, input) {
+    var didPass = true;
     var selectedColumns = input.selectedColumns;
     var columns;
     if (selectedColumns && selectedColumns.length) {
@@ -23,51 +24,43 @@ checkDuplicateRows.name("Duplicate Rows")
 
     var dupes = {};
     // we will want to mark cells to be highlighted here
-    var cells = [];
+    var cellsToHighlight = [];
     // look through the rows
     rows.forEach(function(row,i) {
       // we make a row to keep track of cells we want to highlight
-      var currentRow = {}
+      var currentRow = {};
 
       var hash = "";//
       columns.forEach(function(columnHead) {
-        hash += row[columnHead] + "-|o.O|-"
-      })
+        hash += row[columnHead] + "-|o.O|-";
+      });
       columnHeads.forEach(function(columnHead) {
-        currentRow[columnHead] = 0
-      })
+        currentRow[columnHead] = 0;
+      });
       if(dupes[hash]) {
         columns.forEach(function(columnHead) {
-          currentRow[columnHead] = 1
-        })
+          currentRow[columnHead] = 1;
+          didPass = false;
+        });
         dupes[hash].count++;
       } else {
 
-        dupes[hash] = { count: 1, index: i }
+        dupes[hash] = { count: 1, index: i };
       }
       // push our marking row onto our cells array
-      cells.push(currentRow)
-    })
+      cellsToHighlight.push(currentRow);
+    });
 
     var numDupes = 0;
     Object.keys(dupes).forEach(function(hash){
       if(dupes[hash].count > 1) {
         numDupes++;
       }
-    })
-
-    var newSummary = _.template(`
-      We found <span class="test-value"><%= numDupes %></span> rows </span>.
-    `)({
-      columnHeads: columnHeads,
-      numDupes: numDupes,
-      rows: rows
     });
 
     var result = {
-      passed: true, // this doesn't really fail, as it is mostly an insight
-      highlightCells: cells, // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
-      summary: newSummary
+      passed: didPass,
+      highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
   });
