@@ -11,6 +11,7 @@ var stringsHaveExactly255Characters = new DataprooferTest();
  */
 stringsHaveExactly255Characters.name("Words at their character limit")
   .description("Determine the cells that have exactly 255 characters. Database programs like SQL have a limit to the length of words it can output.")
+  .conclusion("Strings that are exactly 255 characters are suspicious because it could be an export problem. Double-check with your source that you have all the data.")
   .methodology(function(rows, columnHeads) {
     var strings = {};
     columnHeads.forEach(function(columnHead) {

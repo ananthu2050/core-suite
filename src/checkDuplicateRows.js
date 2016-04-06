@@ -11,7 +11,7 @@ var checkDuplicateRows = new DataprooferTest();
  */
 checkDuplicateRows.name("Duplicate Rows")
   .description("Check for any identical rows in the spreadsheet")
-  .conclusion("Inquire about this error with the dataset's maintainer")
+  .conclusion("This data may be unreliable if you weren't expecting things to show up twice in exactly the same way. Consult your source.")
   .methodology(function(rows, columnHeads, input) {
     var didPass = true;
     var selectedColumns = input.selectedColumns;

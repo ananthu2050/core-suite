@@ -13,7 +13,7 @@ var maxBigInteger = new DataprooferTest();
  */
 maxBigInteger.name("Big integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 9,223,372,036,854,775,807 or 18,446,744,073,709,551,616. Common database programs like MySQL and PostgreSQL limit to the size of numbers it can store.")
-  .conclusion("Inquire about this error with the dataset's maintainer")
+  .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
     var maxBigInts = {};
     columnHeads.forEach(function(columnHead) {
