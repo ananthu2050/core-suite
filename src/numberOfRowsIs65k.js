@@ -17,7 +17,7 @@ numberOfRowsIs65k.name("Potentially missing rows")
       didPass = false;
     }
     var result = {
-      passed: didPass // this doesn't really fail, as it is mostly an insight
+      passed: didPass
     };
     return result;
   });

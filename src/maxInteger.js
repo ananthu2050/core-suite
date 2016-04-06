@@ -43,7 +43,6 @@ maxInteger.name("Integer at its SQL upper limit")
       // push our marking row onto our cells array
       cellsToHighlight.push(currentRow);
     });
-
     var result = {
       passed: didPass,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
