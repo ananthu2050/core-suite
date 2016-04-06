@@ -10,7 +10,7 @@ var numberOfRowsIs65k = new DataprooferTest();
  */
 numberOfRowsIs65k.name("Potentially missing rows")
   .description("Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)")
-  .conclusion("Inquire about this error with the dataset's maintainer")
+  .conclusion("This dataset has exactly 65,536 rows, which is an export cutoff in Excel. Double-check with your source that you have all the data.")
   .methodology(function(rows, columnHeads) {
     var didPass = true;
     if(rows.length === 65536) {

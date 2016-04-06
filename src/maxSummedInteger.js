@@ -13,7 +13,7 @@ var maxSummedInteger = new DataprooferTest();
  */
 maxSummedInteger.name("Summed integer at its upper limit")
   .description("If a column contains numbers, make sure it's not 2,097,152. Common database programs like MySQL limit to the size of numbers it can calculate.")
-  .conclusion("Inquire about this error with the dataset's maintainer")
+  .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
     var maxSummedInts = {};
     columnHeads.forEach(function(columnHead) {

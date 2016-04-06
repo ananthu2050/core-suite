@@ -13,7 +13,7 @@ var maxSmallInteger = new DataprooferTest();
  */
 maxSmallInteger.name("Small integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 65,535 or 32,767. Common database programs like MySQL limit to the size of numbers it can store.")
-  .conclusion("Inquire about this error with the dataset's maintainer")
+  .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
     var maxSmallInts = {};
     columnHeads.forEach(function(columnHead) {
