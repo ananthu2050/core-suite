@@ -13,13 +13,13 @@ stringsHaveExactly255Characters.name("Words at their character limit")
   .description("Determine the cells that have exactly 255 characters. Database programs like SQL have a limit to the length of words it can output.")
   .conclusion("Strings that are exactly 255 characters are suspicious because it could be an export problem. Double-check with your source that you have all the data.")
   .methodology(function(rows, columnHeads) {
+    var testState = "passed";
     var strings = {};
     columnHeads.forEach(function(columnHead) {
       strings[columnHead] = 0;
     });
     var cellsToHighlight = []; // we will want to mark cells to be highlighted here
     var has255 = false;
-    var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
       var currentRow = {}; // we make a row to keep track of cells we want to highlight
@@ -36,14 +36,10 @@ stringsHaveExactly255Characters.name("Words at their character limit")
       cellsToHighlight.push(currentRow); // push our marking row onto our cells array
     });
 
-    if(has255) {
-      didPass = false;
-    } else {
-      didPass = true;
-    }
+    if (has255) testState = "failed";
 
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;

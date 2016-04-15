@@ -15,13 +15,13 @@ maxSummedInteger.name("Summed integer at its upper limit")
   .description("If a column contains numbers, make sure it's not 2,097,152. Common database programs like MySQL limit to the size of numbers it can calculate.")
   .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
+    var testState = "passed";
     var maxSummedInts = {};
     columnHeads.forEach(function(columnHead) {
       maxSummedInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
     var cellsToHighlight = [];
-    var passed = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -34,7 +34,7 @@ maxSummedInteger.name("Summed integer at its upper limit")
         if((typeof f === "number") && f === 2097152) {
           maxSummedInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          passed = false;
+          testState = "failed";
         } else {
           currentRow[columnHead] = 0;
         }
@@ -44,7 +44,7 @@ maxSummedInteger.name("Summed integer at its upper limit")
     });
 
     var result = {
-      passed: passed,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;

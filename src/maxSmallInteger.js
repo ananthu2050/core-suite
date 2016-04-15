@@ -15,13 +15,13 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 65,535 or 32,767. Common database programs like MySQL limit to the size of numbers it can store.")
   .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
+    var testState = "passed";
     var maxSmallInts = {};
     columnHeads.forEach(function(columnHead) {
       maxSmallInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
     var cellsToHighlight = [];
-    var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -34,7 +34,7 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
         if((typeof f === "number") && (f === 32767 || f === 65535)) {
           maxSmallInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          didPass = false;
+          testState = "failed";
         } else {
           currentRow[columnHead] = 0;
         }
@@ -44,7 +44,7 @@ maxSmallInteger.name("Small integer at its SQL upper limit")
     });
 
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
