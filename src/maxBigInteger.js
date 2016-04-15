@@ -21,7 +21,7 @@ maxBigInteger.name("Big integer at its SQL upper limit")
     });
     // we will want to mark cells to be highlighted here
     var cellsToHighlight = [];
-    var didPass = true;
+    var testState = "passed";
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -34,7 +34,7 @@ maxBigInteger.name("Big integer at its SQL upper limit")
         if((typeof f === "number") && (f === 9223372036854775807 || f === 18446744073709551615)) {
           maxBigInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          didPass = false;
+          testState = "failed";
         } else {
           currentRow[columnHead] = 0;
         }
@@ -44,7 +44,7 @@ maxBigInteger.name("Big integer at its SQL upper limit")
     });
 
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;

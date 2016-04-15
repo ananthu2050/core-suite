@@ -15,13 +15,13 @@ maxInteger.name("Integer at its SQL upper limit")
   .description("If a column contains numbers, make sure it's not 2,147,483,647 or 4,294,967,295. Common database programs like like MySQL and PostgreSQL limit to the size of numbers it can calculate.")
   .conclusion("It's possible this data was exported from SQL improperly. Consult your source.")
   .methodology(function(rows, columnHeads) {
+    var testState = "passed";
     var maxInts = {};
     columnHeads.forEach(function(columnHead) {
       maxInts[columnHead] = 0;
     });
     // we will want to mark cells to be highlighted here
     var cellsToHighlight = [];
-    var didPass = true;
     // look through the rows
     rows.forEach(function(row) {
       // we make a row to keep track of cells we want to highlight
@@ -35,7 +35,7 @@ maxInteger.name("Integer at its SQL upper limit")
         if((typeof f === "number") && (f === 2147483647 || f === 4294967295)) {
           maxInts[columnHead] += 1;
           currentRow[columnHead] = 1;
-          didPass = false;
+          testState = "failed";
         } else {
           currentRow[columnHead] = 0;
         }
@@ -44,7 +44,7 @@ maxInteger.name("Integer at its SQL upper limit")
       cellsToHighlight.push(currentRow);
     });
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;

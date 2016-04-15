@@ -12,12 +12,12 @@ numberOfRowsIs65k.name("Potentially missing rows")
   .description("Test to see if number of rows is exactly 65,536 rows (cutoff by Excel)")
   .conclusion("This dataset has exactly 65,536 rows, which is an export cutoff in Excel. Double-check with your source that you have all the data.")
   .methodology(function(rows, columnHeads) {
-    var didPass = true;
+    var testState = "passed";
     if(rows.length === 65536) {
-      didPass = false;
+      testState = "failed";
     }
     var result = {
-      passed: didPass
+      testState: testState
     };
     return result;
   });

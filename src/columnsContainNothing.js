@@ -12,8 +12,9 @@ var columnsContainNothing = new DataprooferTest();
  */
 columnsContainNothing.name("Empty Cells")
   .description("Calculates the percentage of rows that are empty for each column")
+  .conclusion("Empty cells can lead to gaps in your data analysis or visualization")
   .methodology(function(rows, columnHeads) {
-    var didPass = true;
+    var testState = "passed";
     // we will want to mark cells to be highlighted here
     var cellsToHighlight = [];
     // look through the rows
@@ -24,7 +25,7 @@ columnsContainNothing.name("Empty Cells")
         var cell = row[columnHead];
         if (util.isEmpty(cell)) {
           currentRow[columnHead] = 1;
-          didPass = false;
+          testState = "warn";
         } else {
           currentRow[columnHead] = 0;
         }
@@ -34,7 +35,7 @@ columnsContainNothing.name("Empty Cells")
     });
 
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight
     };
     return result;

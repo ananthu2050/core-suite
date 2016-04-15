@@ -13,7 +13,7 @@ checkDuplicateRows.name("Duplicate Rows")
   .description("Check for any identical rows in the spreadsheet")
   .conclusion("This data may be unreliable if you weren't expecting things to show up twice in exactly the same way. Consult your source.")
   .methodology(function(rows, columnHeads, input) {
-    var didPass = true;
+    var testState = "passed";
     var selectedColumns = input.selectedColumns;
     var columns;
     if (selectedColumns && selectedColumns.length) {
@@ -40,7 +40,7 @@ checkDuplicateRows.name("Duplicate Rows")
       if(dupes[hash]) {
         columns.forEach(function(columnHead) {
           currentRow[columnHead] = 1;
-          didPass = false;
+          testState = "failed";
         });
         dupes[hash].count++;
       } else {
@@ -59,7 +59,7 @@ checkDuplicateRows.name("Duplicate Rows")
     });
 
     var result = {
-      passed: didPass,
+      testState: testState,
       highlightCells: cellsToHighlight // a mirror of the dataset, but with a 1 or 0 for each cell if it should be highlighted or not
     };
     return result;
