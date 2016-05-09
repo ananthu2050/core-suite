@@ -4,7 +4,8 @@ var _ = require("lodash");
 var columnsContainsOddChars = new DataprooferTest();
 
 /**
-* Calculates the percentage of rows that are empty for each column
+* Calculates the percentage of rows that contain odd characters for each column
+* Source: http://www.w3schools.com/charsets/ref_html_utf8.asp
 *
  * @param  {Array} rows - an array of objects representing rows in the spreadsheet
  * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
@@ -19,6 +20,9 @@ columnsContainsOddChars.name("Odd Letters & Characters")
 
     function containsOddChar(str) {
       var result = false;
+      // look for characters outside typical Latin
+      // character codes
+      // http://www.w3schools.com/charsets/ref_html_utf8.asp
       _.forEach(str, function(char) {
         if (char.charCodeAt() > 255) result = true;
       });
@@ -50,7 +54,7 @@ columnsContainsOddChars.name("Odd Letters & Characters")
     var conclusionStr = "";
     var columns = _.keys(result.columnWise);
     columns.forEach(function(column) {
-      // Column foo:
+      // generate result string
       var currCount = result.columnWise[column];
       if (currCount > 0) {
         conclusionStr += column + ": ";
