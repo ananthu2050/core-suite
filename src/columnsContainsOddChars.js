@@ -1,6 +1,5 @@
 var DataprooferTest = require("dataproofertest-js");
 var util = require("dataproofertest-js/util")
-var _ = require("lodash");
 var columnsContainsOddChars = new DataprooferTest();
 
 /**
@@ -23,9 +22,9 @@ columnsContainsOddChars.name("Odd Letters & Characters")
       // look for characters outside typical Latin
       // character codes
       // http://www.w3schools.com/charsets/ref_html_utf8.asp
-      _.forEach(str, function(char) {
-        if (char.charCodeAt() > 255) result = true;
-      });
+      for (var i=0; i<str.length; i++) {
+        if (str.charCodeAt(i) > 127) result = true
+      }
       return result;
     }
     // look through the rows
