@@ -7,6 +7,7 @@ exports = module.exports = {
 };
 
 var columnsContainNothing = require("./src/columnsContainNothing");
+var columnsContainsOddChars = require("./src/columnsContainsOddChars");
 var checkDuplicateRows = require("./src/checkDuplicateRows");
 var maxInteger = require("./src/maxInteger");
 var maxSmallInteger = require("./src/maxSmallInteger");
@@ -17,6 +18,7 @@ var stringsHaveExactly255Characters = require("./src/stringsHaveExactly255Charac
 
 exports.tests.push(
   columnsContainNothing,
+  columnsContainsOddChars,
   checkDuplicateRows,
   numberOfRowsIs65k,
   stringsHaveExactly255Characters,
