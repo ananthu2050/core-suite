@@ -1,5 +1,5 @@
 var DataprooferTest = require("dataproofertest-js");
-var util = require("dataproofertest-js/util")
+var util = require("dataproofertest-js/util");
 var columnsContainsSpecialChars = new DataprooferTest();
 
 /**
@@ -23,7 +23,7 @@ columnsContainsSpecialChars.name("Special Letters & Characters")
       // character codes
       // http://www.w3schools.com/charsets/ref_html_utf8.asp
       for (var i=0; i<str.length; i++) {
-        if (str.charCodeAt(i) > 127) result = true
+        if (str.charCodeAt(i) > 127) result = true;
       }
       return result;
     }
@@ -51,7 +51,7 @@ columnsContainsSpecialChars.name("Special Letters & Characters")
   })
   .conclusion(function(result) {
     var conclusionStr = "";
-    var columns = _.keys(result.columnWise);
+    var columns = Object.keys(result.columnWise);
     columns.forEach(function(column) {
       // generate result string
       var currCount = result.columnWise[column];

@@ -41,7 +41,7 @@ columnsContainNothing.name("Empty Cells")
   })
   .conclusion(function(result) {
     var conclusionStr = "";
-    var columns = _.keys(result.columnWise);
+    var columns = Object.keys(result.columnWise);
     columns.forEach(function(column) {
       // Column foo:
       var currCount = result.columnWise[column];
@@ -53,6 +53,6 @@ columnsContainNothing.name("Empty Cells")
       }
     });
     return conclusionStr;
-  })
+  });
 
 module.exports =  columnsContainNothing;
