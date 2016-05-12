@@ -46,10 +46,10 @@ columnsContainNothing.name("Empty Cells")
       // Column foo:
       var currCount = result.columnWise[column];
       if (currCount > 0) {
-        conclusionStr += column + ": ";
+        conclusionStr += "column \"" + column + "\": ";
         conclusionStr += result.columnWise[column] + " cells, ";
         conclusionStr += util.percent(result.columnWise[column] / result.highlightCells.length);
-        conclusionStr += " of column <br>";
+        conclusionStr += "<br>";
       }
     });
     return conclusionStr;
