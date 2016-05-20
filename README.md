@@ -1,26 +1,52 @@
 # core-suite
+
 Core suite of tests for Dataproofer. These tests relate to common problems and data checks — namely, making sure data has not been truncated by looking for specific cut-off indicators.
 
-* [Documentation](https://github.com/dataproofer/core-suite/blob/master/README.md)
-* [Repository](https://github.com/dataproofer/core-suite/)
-* [Issues](https://github.com/dataproofer/core-suite/issues)
+-   [Documentation](https://github.com/dataproofer/core-suite/blob/master/README.md)
+-   [Repository](https://github.com/dataproofer/core-suite/)
+-   [Issues](https://github.com/dataproofer/core-suite/issues)
 
 ## Table of Contents
 
-* [Tests](https://github.com/dataproofer/core-suite#tests)
-  * [stringsHaveExactly255Characters.js](https://github.com/dataproofer/core-suite#stringsHaveExactly255Charactersjs)
-  * [maxBigInteger.js](https://github.com/dataproofer/core-suite#maxBigIntegerjs)
-  * [maxInteger.js](https://github.com/dataproofer/core-suite#maxIntegerjs)
-  * [maxSmallInteger.js](https://github.com/dataproofer/core-suite#maxSmallIntegerjs)
-  * [maxSummedInteger.js](https://github.com/dataproofer/core-suite#maxSummedIntegerjs)
-  * [checkDuplicateRows.js](https://github.com/dataproofer/core-suite#checkDuplicateRowsjs)
-  * [numberOfRowsIs65k.js](https://github.com/dataproofer/core-suite#numberOfRowsIs65kjs)
-* [Development](https://github.com/dataproofer/core-suite#development)
-  * [Getting Started](https://github.com/dataproofer/core-suite#getting-started)
-  * [Writing Tests](https://github.com/dataproofer/stats-suite#writing-tests)
-  * [Building Docs](https://github.com/dataproofer/core-suite#building-docs)
+-   [Tests](https://github.com/dataproofer/core-suite#tests)
+    -   [columnsContainNothing.js](https://github.com/dataproofer/core-suite#columnsContainNothing.js)
+    -   [columnsContainsSpecialChars](https://github.com/dataproofer/core-suite#columnsContainsSpecialChars.js)
+    -   [stringsHaveExactly255Characters.js](https://github.com/dataproofer/core-suite#stringsHaveExactly255Charactersjs)
+    -   [maxBigInteger.js](https://github.com/dataproofer/core-suite#maxBigIntegerjs)
+    -   [maxInteger.js](https://github.com/dataproofer/core-suite#maxIntegerjs)
+    -   [maxSmallInteger.js](https://github.com/dataproofer/core-suite#maxSmallIntegerjs)
+    -   [maxSummedInteger.js](https://github.com/dataproofer/core-suite#maxSummedIntegerjs)
+    -   [checkDuplicateRows.js](https://github.com/dataproofer/core-suite#checkDuplicateRowsjs)
+    -   [numberOfRowsIs65k.js](https://github.com/dataproofer/core-suite#numberOfRowsIs65kjs)
+-   [Development](https://github.com/dataproofer/core-suite#development)
+    -   [Getting Started](https://github.com/dataproofer/core-suite#getting-started)
+    -   [Writing Tests](https://github.com/dataproofer/stats-suite#writing-tests)
+    -   [Building Docs](https://github.com/dataproofer/core-suite#building-docs)
 
 ## Tests
+
+# columnsContainNothing.js
+
+Calculates the percentage of rows that are empty for each column
+
+**Parameters**
+
+-   `rows` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** an array of objects representing rows in the spreadsheet
+-   `columnHeads` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** an array of strings for column names of the spreadsheet
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** describing the result
+
+# columnsContainsSpecialChars.js
+
+Calculates the percentage of rows that contain special, non-typical Latin characters for each column
+Source: <http://www.w3schools.com/charsets/ref_html_utf8.asp>
+
+**Parameters**
+
+-   `rows` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** an array of objects representing rows in the spreadsheet
+-   `columnHeads` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** an array of strings for column names of the spreadsheet
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** describing the result
 
 # stringsHaveExactly255Characters.js
 
@@ -126,26 +152,22 @@ Returns **Object** describing the result
 
 ### Getting Started
 
-```
-git clone git@github.com:dataproofer/core-suite.git
-cd core-suite
-npm install
-```
+    git clone git@github.com:dataproofer/core-suite.git
+    cd core-suite
+    npm install
 
 ### Writing Tests
 
-* [How to](https://github.com/dataproofer/Dataproofer#creating-a-new-test)
-* [Helper Scripts](https://github.com/dataproofer/dataproofertest-js/blob/master/DOCUMENTATION.md#util)
-* Templates
-  * [Basic Test](https://github.com/dataproofer/suite-template/blob/master/src/myTest.js)
-  * [Advanced Test](https://github.com/dataproofer/suite-template/blob/master/src/myAdvancedTest.js)
+-   [How to](https://github.com/dataproofer/Dataproofer#creating-a-new-test)
+-   [Helper Scripts](https://github.com/dataproofer/dataproofertest-js/blob/master/DOCUMENTATION.md#util)
+-   Templates
+    -   [Basic Test](https://github.com/dataproofer/suite-template/blob/master/src/myTest.js)
+    -   [Advanced Test](https://github.com/dataproofer/suite-template/blob/master/src/myAdvancedTest.js)
 
 ### Building Docs
 
 We use [documentation.js](https://github.com/documentationjs/documentation), but have created a handy script for regenerating documentation.
 
-```
-npm run docs
-```
+    npm run docs
 
 Then open up and check your docs in [DOCUMENTATION.md](https://github.com/dataproofer/info-suite/blob/master/DOCUMENTATION.md)
