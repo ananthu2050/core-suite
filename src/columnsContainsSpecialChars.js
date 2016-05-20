@@ -3,13 +3,13 @@ var util = require("dataproofertest-js/util");
 var columnsContainsSpecialChars = new DataprooferTest();
 
 /**
-* Calculates the percentage of rows that contain Special characters for each column
+* Calculates the percentage of rows that contain special, non-typical Latin characters for each column
 * Source: http://www.w3schools.com/charsets/ref_html_utf8.asp
 *
- * @param  {Array} rows - an array of objects representing rows in the spreadsheet
- * @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
- * @return {Object} describing the result
- */
+* @param  {Array} rows - an array of objects representing rows in the spreadsheet
+* @param  {Array} columnHeads - an array of strings for column names of the spreadsheet
+* @return {Object} describing the result
+*/
 columnsContainsSpecialChars.name("Special Letters & Characters")
   .description("Determine which cells contain wingdings, boxes, or accented characters. These can cause errors with some visualization & analysis tools.")
   .methodology(function (rows, columnHeads) {
